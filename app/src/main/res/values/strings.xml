@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Demo2</string>
     <string name="hello_world">Hello World</string>
+    <string name="btnBack">Back</string>
+    <string name="btnLogout">Logout</string>
+    <string name="btnAdd">Add</string>
+    <string name="instructions">Instructions:</string>
+    <string name="ingridients">Ingridients</string>
 </resources>
