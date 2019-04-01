@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AddNewRecipeActivity"></activity>
+        <activity android:name=".OneRecipePage"></activity>
         <activity android:name=".HelloPage" />
         <activity android:name=".MainActivity">
             <intent-filter>

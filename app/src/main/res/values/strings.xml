@@ -6,4 +6,9 @@
     <string name="hint_recipe_name">Recipe Name</string>
     <string name="hint_enter_recipe">Enter Recipe</string>
     <string name="label_btn_back">BACK</string>
+    <string name="btnBack">Back</string>
+    <string name="btnLogout">Logout</string>
+    <string name="btnAdd">Add</string>
+    <string name="instructions">Instructions:</string>
+    <string name="ingridients">Ingridients</string>
 </resources>
