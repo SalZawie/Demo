@@ -11,4 +11,10 @@
     <string name="btnAdd">Add</string>
     <string name="instructions">Instructions:</string>
     <string name="ingridients">Ingridients</string>
+    <string name="hint_for_name">Enter your name</string>
+    <string name="hint_for_password">Enter your password</string>
+    <string name="submitButtonText">Submit</string>
+    <string name="backButtonText">Back</string>
+    <string name="logoutButtonText">Logout</string>
+    <string name="addRecipeButtonText">+</string>
 </resources>
