@@ -23,7 +23,7 @@ public class RecipePageActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RecipePageActivity.this, MainActivity.class); //Replace MainActivity.class with OneRecipePage.class
+                Intent intent = new Intent(RecipePageActivity.this, SearchPageActivity.class); //Replace MainActivity.class with OneRecipePage.class
                 startActivity(intent);
             }
         });
@@ -39,7 +39,7 @@ public class RecipePageActivity extends AppCompatActivity {
         addRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RecipePageActivity.this, MainActivity.class); //Replace MainAcitivity.class with AddNewRecipeActivity.class
+                Intent intent = new Intent(RecipePageActivity.this, AddNewRecipeActivity.class); //Replace MainAcitivity.class with AddNewRecipeActivity.class
                 startActivity(intent);
             }
         });
