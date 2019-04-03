@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
                 strPassword = pw.getText().toString().trim();
 
                 if (!strName.isEmpty() && !strPassword.isEmpty()) {
-                    Intent F = new Intent(MainActivity.this, OneRecipePage.class);
-                    startActivity(F);
+                    Intent intent = new Intent(MainActivity.this, OneRecipePage.class);
+                    startActivity(intent);
                 }
             }
         });
