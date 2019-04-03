@@ -6,16 +6,20 @@
     <string name="hint_enter_recipe">Enter Recipe</string>
     <string name="hint_for_name">Enter your name</string>
     <string name="hint_for_password">Enter your password</string>
+    <string name="hint_forgot_password">Forgot your password?</string>
 
     <string name="label_btn_clear_all_input">CLEAR</string>
     <string name="label_btn_save_info">SAVE</string>
     <string name="label_btn_back">BACK</string>
     <string name="label_btn_logout">Logout</string>
+    <string name="label_btn_login">Login</string>
     <string name="label_btn_add">Add</string>
     <string name="label_btn_submit">Submit</string>
 
     <string name="instructions">Instructions:</string>
     <string name="ingridients">Ingridients</string>
 
+    <string name="txtUserName">+</string>
+    <string name="txtPassword">+</string>
 
 </resources>
