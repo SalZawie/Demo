@@ -26,13 +26,13 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view) {
+            public void onClick(View g) {
                 strName = name.getText().toString().trim();
                 strPassword = pw.getText().toString().trim();
 
                 if (!strName.isEmpty() && !strPassword.isEmpty()) {
-                    Intent intent = new Intent(MainActivity.this, OneRecipePage.class);
-                    startActivity(intent);
+                    Intent F = new Intent(MainActivity.this, OneRecipePage.class);
+                    startActivity(F);
                 }
             }
         });

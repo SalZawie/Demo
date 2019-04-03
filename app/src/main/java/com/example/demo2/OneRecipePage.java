@@ -3,6 +3,7 @@ package com.example.demo2;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 public class OneRecipePage extends AppCompatActivity {
 
@@ -12,19 +13,21 @@ public class OneRecipePage extends AppCompatActivity {
         setContentView(R.layout.activity_one_recipe_page);
     }
 
-    public void back()
+    public void back(View view)
     {
-
+        Intent intent = new Intent(OneRecipePage.this, RecipePageActivity.class);
+        startActivity(intent);
     }
 
-    public void logout()
+    public void logout(View view)
     {
         Intent intent = new Intent(OneRecipePage.this, MainActivity.class);
         startActivity(intent);
     }
 
-    public void add()
+    public void add(View view)
     {
-
+        Intent intent = new Intent(OneRecipePage.this, AddNewRecipeActivity.class);
+        startActivity(intent);
     }
 }
