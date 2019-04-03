@@ -3,6 +3,7 @@ package com.example.demo2;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         submitButton = findViewById(R.id.btnSubmit);
         name = findViewById(R.id.name);
         pw   = findViewById(R.id.pw);
-
+        Log.d("H", "H");
         submitButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
