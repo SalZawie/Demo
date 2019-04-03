@@ -17,4 +17,7 @@
     <string name="backButtonText">Back</string>
     <string name="logoutButtonText">Logout</string>
     <string name="addRecipeButtonText">+</string>
+    <string name="btnLogin">+</string>
+    <string name="txtUserName">+</string>
+    <string name="txtPassword">+</string>
 </resources>
