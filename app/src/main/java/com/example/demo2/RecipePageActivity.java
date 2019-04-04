@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class RecipePageActivity extends AppCompatActivity {
+public class RecipePageActivity extends AppCompatActivity implements View.OnClickListener {
     private Button backButton;
     private Button logoutButton;
     private Button addRecipeButton;
@@ -23,7 +23,7 @@ public class RecipePageActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RecipePageActivity.this, SearchPageActivity.class); //Replace MainActivity.class with OneRecipePage.class
+                Intent intent = new Intent(RecipePageActivity.this, MainActivity.class); //(SearchPageActivity) Replace MainActivity.class with OneRecipePage.class
                 startActivity(intent);
             }
         });
@@ -43,5 +43,11 @@ public class RecipePageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onClick(View view)
+    {
+
     }
 }
