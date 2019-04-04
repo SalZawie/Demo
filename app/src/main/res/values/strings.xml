@@ -21,8 +21,21 @@
     <!-->Labels for the fields to display the elements<-->
     <string name="instructions">Instructions:</string>
     <string name="ingridients">Ingridients</string>
+    <string name="submitButtonText">Submit</string>
+    <string name="backButtonText">Back</string>
+    <string name="logoutButtonText">Logout</string>
+    <string name="addRecipeButtonText">+</string>
+    <string name="add_ingredient_1_text">Add Ingredient #1</string>
+    <string name="add_ingredient_2_text">Add Ingredient #2</string>
+    <string name="add_ingredient_3_text">Add Ingredient #3</string>
+    <string name="search_text">Search</string>
+    <string name="food">Food</string>
+    <string name="drinks">Drinks</string>
+    <string name="search_for">Search for:</string>
     <string name="txtUserName">UserName</string>
     <string name="txtPassword">Password</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign Up</string>
+    <string name="btn_add_ingredient">Add Ingredient</string>
+    <string name="hint_ingredient">ingredient</string>
 </resources>
