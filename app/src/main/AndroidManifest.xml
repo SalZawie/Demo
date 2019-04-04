@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SearchPageActivity"></activity>
+        <activity android:name=".RecipePageActivity" />
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".AddNewRecipeActivity" />
         <activity android:name=".OneRecipePage" />
