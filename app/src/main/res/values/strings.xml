@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">Demo2</string>
     <string name="hello_world">Hello World</string>
+
     <!-->Hints for placeholders<-->
     <string name="hint_recipe_name">Recipe Name</string>
     <string name="hint_enter_recipe">Enter Recipe</string>
-    <string name="hint_for_name">Enter your name</string>
-    <string name="hint_for_password">Enter your password</string>
+    <string name="hint_for_name">UserName</string>
+    <string name="hint_for_password">Password</string>
     <string name="hint_forgot_password">Forgot your password?</string>
+
     <!-->Labels for buttons<-->
     <string name="label_btn_clear_all_input">CLEAR</string>
     <string name="label_btn_save_info">SAVE</string>
@@ -15,9 +17,12 @@
     <string name="label_btn_login">Login</string>
     <string name="label_btn_add">Add</string>
     <string name="label_btn_submit">Submit</string>
+
     <!-->Labels for the fields to display the elements<-->
     <string name="instructions">Instructions:</string>
     <string name="ingridients">Ingridients</string>
-    <string name="txtUserName">+</string>
-    <string name="txtPassword">+</string>
+    <string name="txtUserName">UserName</string>
+    <string name="txtPassword">Password</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

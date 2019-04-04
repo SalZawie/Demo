@@ -18,50 +18,47 @@ public class MainActivity extends AppCompatActivity
 
     AlertDialog.Builder alertBuilder;
 
-    @Override
+   @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loginButton = findViewById(R.id.btnLogin);
-        userName = findViewById(R.id.txtUserName);
-        passWord = findViewById(R.id.txtPassword);
+            Button loginButton = (Button)   findViewById(R.id.btnLogin);
+            final EditText userName  = (EditText) findViewById(R.id.txtUserName);
+            final EditText passWord  = (EditText) findViewById(R.id.txtPassword);
 
-        final String strUserName = userName.getText().toString().trim();
-        final String strPassword = passWord.getText().toString().trim();
+            alertBuilder = new AlertDialog.Builder(MainActivity.this);
 
-        alertBuilder = new AlertDialog.Builder(MainActivity.this);
-
-        loginButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
+            loginButton.setOnClickListener(new View.OnClickListener()
             {
-                if (!strUserName.isEmpty() && !strPassword.isEmpty())
+                @Override
+                public void onClick(View view)
                 {
-                    Intent intent = new Intent(MainActivity.this, OneRecipePage.class);
-                    startActivity(intent);
-
-                    // TODO
-                    // Set UserName & Password fields to Blank.
-                }
-                else
-                {
-                    alertBuilder.setMessage("Invalid UserName or Password")
-                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                    if (!userName.getText().toString().isEmpty() && !passWord.getText().toString().isEmpty())
                     {
-                         public void onClick(DialogInterface dialog, int id)
-                         {
-                            //TODO: in case of cancellation
-                         }
-                    });
+                        Intent intent = new Intent(MainActivity.this, OneRecipePage.class);
+                        startActivity(intent);
 
-                    AlertDialog alert = alertBuilder.create();
-                    alert.setTitle("Alert !!");
-                    alert.show();
+                        // TODO
+                        // Set UserName & Password fields to Blank.
+                    }
+                    else
+                    {
+                        alertBuilder.setMessage("Invalid UserName or Password")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener()
+                                {
+                                    public void onClick(DialogInterface dialog, int id)
+                                    {
+                                    }
+                                });
+
+                        AlertDialog alert = alertBuilder.create();
+                        alert.setTitle("Alert !!");
+                        alert.show();
+                    }
                 }
-            }
-        });
+            });
     }
 }
