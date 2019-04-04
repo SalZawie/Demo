@@ -20,4 +20,15 @@
     <string name="ingridients">Ingridients</string>
     <string name="txtUserName">+</string>
     <string name="txtPassword">+</string>
+    <string name="submitButtonText">Submit</string>
+    <string name="backButtonText">Back</string>
+    <string name="logoutButtonText">Logout</string>
+    <string name="addRecipeButtonText">+</string>
+    <string name="add_ingredient_1_text">Add Ingredient #1</string>
+    <string name="add_ingredient_2_text">Add Ingredient #2</string>
+    <string name="add_ingredient_3_text">Add Ingredient #3</string>
+    <string name="search_text">Search</string>
+    <string name="food">Food</string>
+    <string name="drinks">Drinks</string>
+    <string name="search_for">Search for:</string>
 </resources>
