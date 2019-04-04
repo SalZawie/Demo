@@ -55,7 +55,8 @@ public class RecipePageActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RecipePageActivity.this, SearchPageActivity.class);
+                Intent intent = new Intent(RecipePageActivity.this, RecipePageActivity.class); //                Intent intent = new Intent(RecipePageActivity.this,); //
+
                 startActivity(intent);
             }
         });
