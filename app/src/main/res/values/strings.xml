@@ -6,6 +6,4 @@
     <string name="hint_recipe_name">Recipe Name</string>
     <string name="hint_enter_recipe">Enter Recipe</string>
     <string name="label_btn_back">BACK</string>
-    <string name="label_btn_add_ingredient">ADD INGREDIENT</string>
-    <string name="hint_ingredient">Ingredient</string>
 </resources>
