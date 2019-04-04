@@ -1,14 +1,14 @@
 {
   "project_info": {
-    "project_number": "28758582802",
-    "firebase_url": "https://cookingapp-swc.firebaseio.com",
-    "project_id": "cookingapp-swc",
-    "storage_bucket": "cookingapp-swc.appspot.com"
+    "project_number": "8206526873",
+    "firebase_url": "https://recipeapp-wcs.firebaseio.com",
+    "project_id": "recipeapp-wcs",
+    "storage_bucket": "recipeapp-wcs.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:28758582802:android:bc2d77ede9c0dc3e",
+        "mobilesdk_app_id": "1:8206526873:android:bc2d77ede9c0dc3e",
         "android_client_info": {
           "package_name": "com.example.demo2"
         }
@@ -16,14 +16,14 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDLGj2ihwcf6vU-BM-Un18t0IA1s7dSVOE"
+          "current_key": "AIzaSyDzTaazAmdfCiF6xyIpHAWwfH6ztkISkd4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "28758582802-ao2oq853n86bterhd3nf6ohv37tsrkm1.apps.googleusercontent.com",
+              "client_id": "8206526873-tks1ieva3h09d6oetm1s31b5dve6u2a4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
