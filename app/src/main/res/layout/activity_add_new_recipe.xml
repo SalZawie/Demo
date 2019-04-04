@@ -22,6 +22,9 @@
             android:textSize="@dimen/dans_text_size"
             android:textStyle="bold"
             android:inputType="textShortMessage"
+            android:scrollHorizontally="false"
+            android:maxLines="1"
+            android:maxLength="35"
             android:hint="@string/hint_recipe_name"
             />
 
@@ -30,19 +33,50 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/layout_recipe_description"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="150dp"
         android:layout_below="@+id/layout_txt_recipe_name"
-        android:layout_above="@+id/btn_previous_from_add_new_recipe">
+        android:layout_marginBottom="16dp">
 
         <EditText
             android:id="@+id/edittxt_recipe_description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="32dp"
+            android:hint="@string/hint_enter_recipe"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength="2000"
+            android:scrollHorizontally="false"
             android:textSize="@dimen/dans_text_size"
-            android:inputType="textLongMessage"
-            android:hint="@string/hint_enter_recipe"/>
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layout_add_ingredient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_recipe_description">
+
+        <EditText
+            android:id="@+id/edittxt_ingredient_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_ingredient"
+            android:inputType="textShortMessage"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:scrollHorizontally="false"
+            android:maxLines="1"
+            android:maxLength="35"/>
+
+        <Button
+            android:id="@+id/btn_add_an_ingredient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_btn_add_ingredient"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -51,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btn_clear_all_input"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/label_btn_back"
         android:textStyle="bold" />
 
