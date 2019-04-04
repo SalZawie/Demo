@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-            Button loginButton = (Button)   findViewById(R.id.btnLogin);
-            final EditText userName  = (EditText) findViewById(R.id.txtUserName);
-            final EditText passWord  = (EditText) findViewById(R.id.txtPassword);
+            loginButton = (Button)   findViewById(R.id.btnLogin);
+            userName    = (EditText) findViewById(R.id.txtUserName);
+            passWord    = (EditText) findViewById(R.id.txtPassword);
 
             alertBuilder = new AlertDialog.Builder(MainActivity.this);
 
