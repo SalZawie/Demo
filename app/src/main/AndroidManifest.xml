@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".RecipePageActivity" />
-        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".SignUpActivity"/>
         <activity android:name=".AddNewRecipeActivity" />
         <activity android:name=".OneRecipePage" />
         <activity android:name=".MainActivity">
