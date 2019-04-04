@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
 {
-    private Button   loginButton;
+    private Button loginButton;
+    private Button signUpButton;
+
     private EditText userName;
     private EditText passWord;
 
@@ -24,9 +26,11 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-            loginButton = (Button)   findViewById(R.id.btnLogin);
-            userName    = (EditText) findViewById(R.id.txtUserName);
-            passWord    = (EditText) findViewById(R.id.txtPassword);
+            loginButton  = (Button)   findViewById(R.id.btnLogin);
+            signUpButton = (Button) findViewById(R.id.btnSignUp);
+
+            userName     = (EditText) findViewById(R.id.txtUserName);
+            passWord     = (EditText) findViewById(R.id.txtPassword);
 
             alertBuilder = new AlertDialog.Builder(MainActivity.this);
 
@@ -60,5 +64,15 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
             });
+
+        signUpButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

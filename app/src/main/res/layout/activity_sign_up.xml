@@ -55,7 +55,7 @@
                 android:textColorHint="@color/colorAccent" />
 
             <Button
-                android:id="@+id/buttonSignUp"
+                android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
