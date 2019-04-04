@@ -12,7 +12,6 @@
         <activity android:name=".SearchPageActivity"></activity>
         <activity android:name=".AddNewRecipeActivity" />
         <activity android:name=".OneRecipePage" />
-        <activity android:name=".HelloPage" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
