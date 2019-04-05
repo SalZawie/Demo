@@ -26,52 +26,52 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-            loginButton  = (Button)   findViewById(R.id.btnLogin);
-            signUpButton = (Button) findViewById(R.id.btnSignUp);
+        loginButton  = (Button) findViewById(R.id.btnLogin);
+        signUpButton = (Button) findViewById(R.id.btnSignUp);
 
-            userName     = (EditText) findViewById(R.id.txtUserName);
-            passWord     = (EditText) findViewById(R.id.txtPassword);
+        userName     = (EditText) findViewById(R.id.txtUserName);
+        passWord     = (EditText) findViewById(R.id.txtPassword);
 
-            alertBuilder = new AlertDialog.Builder(MainActivity.this);
+        alertBuilder = new AlertDialog.Builder(MainActivity.this);
 
-            loginButton.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    if (!userName.getText().toString().isEmpty() && !passWord.getText().toString().isEmpty())
-                    {
-                        Intent intent = new Intent(MainActivity.this, OneRecipePage.class);
-                        startActivity(intent);
+        loginButton.setOnClickListener(new View.OnClickListener()
+        {
+           @Override
+           public void onClick(View view)
+           {
+             if (!userName.getText().toString().isEmpty() && !passWord.getText().toString().isEmpty())
+             {
+                  Intent intent = new Intent(MainActivity.this, SearchPageActivity.class);
+                  startActivity(intent);
 
-                        // TODO
-                        // Set UserName & Password fields to Blank.
-                    }
-                    else
-                    {
-                        alertBuilder.setMessage("Invalid UserName or Password")
-                                .setCancelable(false)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener()
-                                {
-                                    public void onClick(DialogInterface dialog, int id)
-                                    {
-                                    }
-                                });
+                  // TODO
+                  // Set UserName & Password fields to Blank.
+             }
+             else
+             {
+                 alertBuilder.setMessage("Invalid UserName or Password")
+                             .setCancelable(false)
+                             .setPositiveButton("OK", new DialogInterface.OnClickListener()
+                              {
+                                 public void onClick(DialogInterface dialog, int id)
+                                 {
+                                 }
+                              });
 
-                        AlertDialog alert = alertBuilder.create();
-                        alert.setTitle("Alert !!");
-                        alert.show();
-                    }
-                }
-            });
+                 AlertDialog alert = alertBuilder.create();
+                 alert.setTitle("Alert !!");
+                 alert.show();
+             }
+           }
+        });
 
         signUpButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
-                startActivity(intent);
+               Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+               startActivity(intent);
             }
         });
     }
