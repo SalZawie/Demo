@@ -4,13 +4,25 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class OneRecipePage extends AppCompatActivity {
+
+    ImageView photo;
+    TextView name;
+    TextView ingredients;
+    TextView instructions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_recipe_page);
+        //Initializing variables
+        photo = findViewById(R.id.recipePhoto);
+        name = findViewById(R.id.recipeName);
+        ingredients = findViewById(R.id.IngrList);
+        instructions = findViewById(R.id.instructions);
     }
 
     public void back(View view)
