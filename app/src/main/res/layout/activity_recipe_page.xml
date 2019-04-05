@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/firstHorizontalGuideline"
+        app:layout_constraintBottom_toTopOf="@+id/firstHorizontal"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/firstHorizontalGuideline"
+        app:layout_constraintBottom_toTopOf="@+id/firstHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,10 +39,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/secondHorizontalGuideline"
+        app:layout_constraintBottom_toTopOf="@+id/secondHorizontal"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/firstHorizontalGuideline" />
+        app:layout_constraintTop_toTopOf="@+id/firstHorizontal" />
 
     <TextView
         android:id="@+id/foodTextView1"
@@ -55,20 +55,20 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/secondHorizontalGuideline"
+        app:layout_constraintBottom_toTopOf="@+id/secondHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
-        app:layout_constraintTop_toTopOf="@+id/firstHorizontalGuideline" />
+        app:layout_constraintTop_toTopOf="@+id/firstHorizontal" />
 
     <ImageView
         android:id="@+id/foodImageView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/thirdHorizontalGuideline"
+        app:layout_constraintBottom_toTopOf="@+id/thirdHorizontal"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/secondHorizontalGuideline" />
+        app:layout_constraintTop_toTopOf="@+id/secondHorizontal" />
 
     <TextView
         android:id="@+id/foodTextView2"
@@ -81,20 +81,20 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/thirdHorizontalGuideline"
+        app:layout_constraintBottom_toTopOf="@+id/thirdHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
-        app:layout_constraintTop_toTopOf="@+id/secondHorizontalGuideline" />
+        app:layout_constraintTop_toTopOf="@+id/secondHorizontal" />
 
     <ImageView
         android:id="@+id/foodImageView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/fourthHorizontalGuideline"
+        app:layout_constraintBottom_toTopOf="@+id/fourthHorizontal"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/thirdHorizontalGuideline" />
+        app:layout_constraintTop_toTopOf="@+id/thirdHorizontal" />
 
     <TextView
         android:id="@+id/foodTextView3"
@@ -107,10 +107,10 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/fourthHorizontalGuideline"
+        app:layout_constraintBottom_toTopOf="@+id/fourthHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
-        app:layout_constraintTop_toTopOf="@+id/thirdHorizontalGuideline" />
+        app:layout_constraintTop_toTopOf="@+id/thirdHorizontal" />
 
     <Button
         android:id="@+id/backButton"
@@ -123,7 +123,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fourthHorizontalGuideline" />
+        app:layout_constraintTop_toTopOf="@+id/fourthHorizontal" />
 
     <Button
         android:id="@+id/addRecipeButton"
@@ -135,7 +135,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/logoutButton"
-        app:layout_constraintTop_toTopOf="@+id/fourthHorizontalGuideline" />
+        app:layout_constraintTop_toTopOf="@+id/fourthHorizontal" />
 
     <Button
         android:id="@+id/logoutButton"
@@ -147,7 +147,7 @@
         app:layout_constraintEnd_toStartOf="@+id/addRecipeButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/backButton"
-        app:layout_constraintTop_toTopOf="@+id/fourthHorizontalGuideline" />
+        app:layout_constraintTop_toTopOf="@+id/fourthHorizontal" />
 
     <android.support.constraint.Guideline
         android:id="@+id/verticalGuideline"
@@ -157,28 +157,28 @@
         app:layout_constraintGuide_begin="160dp" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/firstHorizontalGuideline"
+        android:id="@+id/firstHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="160dp" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/secondHorizontalGuideline"
+        android:id="@+id/secondHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="330dp" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/thirdHorizontalGuideline"
+        android:id="@+id/thirdHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="500dp" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/fourthHorizontalGuideline"
+        android:id="@+id/fourthHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
