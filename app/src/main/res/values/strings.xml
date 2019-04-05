@@ -39,7 +39,7 @@
     <string name="btn_add_ingredient">Add Ingredient</string>
     <string name="hint_ingredient">ingredient</string>
     <string name="label_btn_add_ingredient">Add Ingredient</string>
-    <string name="full_name">Full Name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="hint_for_email">hint for Email</string>
 </resources>

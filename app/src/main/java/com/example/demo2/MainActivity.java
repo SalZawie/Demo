@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         loginButton  = (Button) findViewById(R.id.btnLogin);
         signUpButton = (Button) findViewById(R.id.btnSignUp);
 
-        userName     = (EditText) findViewById(R.id.txtUserName);
+        userName     = (EditText) findViewById(R.id.txtEmail);
         passWord     = (EditText) findViewById(R.id.txtPassword);
 
         alertBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -65,13 +65,11 @@ public class MainActivity extends AppCompatActivity
            }
         });
 
-        signUpButton.setOnClickListener(new View.OnClickListener()
-        {
+        signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-               Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
-               startActivity(intent);
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(intent);
             }
         });
     }
