@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
 {
-    private Button   loginButton;
+    private Button loginButton;
+    private Button signUpButton;
+
     private EditText userName;
     private EditText passWord;
 
@@ -24,41 +26,51 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-            loginButton = (Button)   findViewById(R.id.btnLogin);
-            userName    = (EditText) findViewById(R.id.txtUserName);
-            passWord    = (EditText) findViewById(R.id.txtPassword);
+        loginButton  = (Button) findViewById(R.id.btnLogin);
+        signUpButton = (Button) findViewById(R.id.btnSignUp);
 
-            alertBuilder = new AlertDialog.Builder(MainActivity.this);
+        userName     = (EditText) findViewById(R.id.txtEmail);
+        passWord     = (EditText) findViewById(R.id.txtPassword);
 
-            loginButton.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    if (!userName.getText().toString().isEmpty() && !passWord.getText().toString().isEmpty())
-                    {
-                        Intent intent = new Intent(MainActivity.this, OneRecipePage.class);
-                        startActivity(intent);
+        alertBuilder = new AlertDialog.Builder(MainActivity.this);
 
-                        // TODO
-                        // Set UserName & Password fields to Blank.
-                    }
-                    else
-                    {
-                        alertBuilder.setMessage("Invalid UserName or Password")
-                                .setCancelable(false)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener()
-                                {
-                                    public void onClick(DialogInterface dialog, int id)
-                                    {
-                                    }
-                                });
+        loginButton.setOnClickListener(new View.OnClickListener()
+        {
+           @Override
+           public void onClick(View view)
+           {
+             if (!userName.getText().toString().isEmpty() && !passWord.getText().toString().isEmpty())
+             {
+                  Intent intent = new Intent(MainActivity.this, SearchPageActivity.class);
+                  startActivity(intent);
 
-                        AlertDialog alert = alertBuilder.create();
-                        alert.setTitle("Alert !!");
-                        alert.show();
-                    }
-                }
-            });
+                  // TODO
+                  // Set UserName & Password fields to Blank.
+             }
+             else
+             {
+                 alertBuilder.setMessage("Invalid UserName or Password")
+                             .setCancelable(false)
+                             .setPositiveButton("OK", new DialogInterface.OnClickListener()
+                              {
+                                 public void onClick(DialogInterface dialog, int id)
+                                 {
+                                 }
+                              });
+
+                 AlertDialog alert = alertBuilder.create();
+                 alert.setTitle("Alert !!");
+                 alert.show();
+             }
+           }
+        });
+
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
