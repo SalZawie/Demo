@@ -27,4 +27,5 @@
     <string name="sign_up">Sign Up</string>
     <string name="btn_add_ingredient">Add Ingredient</string>
     <string name="hint_ingredient">ingredient</string>
+    <string name="label_btn_delete_row">X</string>
 </resources>

@@ -24,8 +24,7 @@
             android:scrollHorizontally="false"
             android:maxLines="1"
             android:maxLength="35"
-            android:hint="@string/hint_recipe_name"
-            />
+            android:hint="@string/hint_recipe_name" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -50,34 +49,48 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/layout_add_ingredient"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/parent_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:layout_below="@+id/layout_recipe_description">
 
-        <EditText
-            android:id="@+id/edittxt_ingredient_1"
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_ingredient"
-            android:inputType="textShortMessage"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:scrollHorizontally="false"
-            android:maxLines="1"
-            android:maxLength="35"/>
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/inputfield_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:hint="@string/hint_ingredient"
+                android:inputType="textShortMessage"/>
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="@string/label_btn_delete_row"
+                android:onClick="onDelete"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
         <Button
             android:id="@+id/btn_add_an_ingredient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btn_add_ingredient"
-            android:layout_alignParentBottom="true"
+            android:layout_above="@+id/btn_previous_from_add_new_recipe"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"/>
-
-    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/btn_previous_from_add_new_recipe"
