@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 public class OneRecipePage extends AppCompatActivity {
 
+    //Firebase account:
+
     ImageView photo;
     TextView name;
     TextView ingredients;
