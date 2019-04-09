@@ -11,76 +11,117 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="411dp"
-        android:layout_height="228dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/colorPrimaryDark"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="2dp">
+        app:layout_constraintBottom_toTopOf="@+id/label_Ingredients"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/recipeName"
             android:layout_width="258dp"
             android:layout_height="79dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="27dp"
             android:text="@string/recipe_name"
             android:textAllCaps="true"
             android:textColor="@color/colorWhite"
             android:textSize="30sp"
             android:textStyle="bold"
-            tools:layout_editor_absoluteX="32dp"
-            tools:layout_editor_absoluteY="27dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/recipePhoto"
-        android:layout_width="165dp"
-        android:layout_height="152dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="118dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="397dp"
         android:src="@drawable/pizza"
         app:civ_border_color="@color/colorWhite"
         app:civ_border_width="2dp"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="118dp" />
+        app:layout_constraintBottom_toTopOf="@+id/btnBack"
+        app:layout_constraintEnd_toStartOf="@+id/label_Ingredients"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/label_Ingredients"
-        android:layout_width="177dp"
-        android:layout_height="30dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="19dp"
         android:text="@string/ingredients"
         android:textAllCaps="true"
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="216dp"
-        tools:layout_editor_absoluteY="241dp" />
+        app:layout_constraintBottom_toTopOf="@+id/ingredients"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/recipePhoto"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <TextView
         android:id="@+id/ingredients"
-        android:layout_width="361dp"
-        android:layout_height="152dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="10dp"
         android:text="TextView"
         android:textColor="@color/colorWhite"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="289dp" />
+        app:layout_constraintBottom_toTopOf="@+id/label_Instructions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_Ingredients" />
 
     <TextView
         android:id="@+id/label_Instructions"
-        android:layout_width="197dp"
-        android:layout_height="32dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/instructions"
         android:textAllCaps="true"
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="451dp" />
+        app:layout_constraintBottom_toTopOf="@+id/instructions"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ingredients" />
 
     <TextView
         android:id="@+id/instructions"
-        android:layout_width="359dp"
-        android:layout_height="152dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginBottom="80dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="494dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_Instructions" />
 
 
     <Button
@@ -126,6 +167,7 @@
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnLogout"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipePhoto" />
 
 </android.support.constraint.ConstraintLayout>
