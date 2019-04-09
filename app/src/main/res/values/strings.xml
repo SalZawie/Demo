@@ -22,7 +22,7 @@
 
     <!-->Labels for the fields to display the elements<-->
     <string name="instructions">Instructions:</string>
-    <string name="ingridients">Ingridients</string>
+    <string name="ingredients">Ingredients:</string>
     <string name="submitButtonText">Submit</string>
     <string name="backButtonText">Back</string>
     <string name="logoutButtonText">Logout</string>
@@ -43,7 +43,10 @@
     <string name="label_btn_logout1">LOGOUT</string>
     <string name="label_btn_add1">ADD RECIPE</string>
 
+
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="hint_for_email">hint for Email</string>
+
+    <string name="recipe_name">Italian Pizza</string>
 </resources>

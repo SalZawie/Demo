@@ -12,7 +12,7 @@ public class OneRecipePage extends AppCompatActivity {
     //Firebase account:
 
     ImageView photo;
-    TextView name;
+    TextView recipeName;
     TextView ingredients;
     TextView instructions;
 
@@ -22,7 +22,7 @@ public class OneRecipePage extends AppCompatActivity {
         setContentView(R.layout.activity_one_recipe_page);
         //Initializing variables
         photo = findViewById(R.id.recipePhoto);
-        name = findViewById(R.id.recipeName);
+        recipeName = findViewById(R.id.recipeName);
         ingredients = findViewById(R.id.IngrList);
         instructions = findViewById(R.id.instructions);
     }
