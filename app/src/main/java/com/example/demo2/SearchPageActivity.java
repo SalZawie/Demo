@@ -1,7 +1,6 @@
 package com.example.demo2;
 
 import android.content.Intent;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,8 +37,8 @@ public class SearchPageActivity extends AppCompatActivity {
         backButton = findViewById(R.id.backButton);
         logoutButton = findViewById(R.id.logoutButton);
         addRecipeButton = findViewById(R.id.addRecipeButton);
-        foodCheckBox = findViewById(R.id.foodCheckBox);
-        drinkCheckBox = findViewById(R.id.drinkCheckBox);
+        foodCheckBox = findViewById(R.id.foodRadioButtom);
+        drinkCheckBox = findViewById(R.id.drinkRadioButtom);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
