@@ -39,10 +39,10 @@
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="btn_add_ingredient">Add Ingredient</string>
     <string name="hint_ingredient">ingredient</string>
+    <string name="label_btn_delete_row">X</string>
     <string name="label_btn_add_ingredient">Add Ingredient</string>
     <string name="label_btn_logout1">LOGOUT</string>
     <string name="label_btn_add1">ADD RECIPE</string>
-
 
     <string name="email">Email</string>
     <string name="password">Password</string>

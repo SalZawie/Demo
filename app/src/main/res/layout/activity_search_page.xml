@@ -83,9 +83,9 @@
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:text="Search"
         app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
         app:layout_constraintTop_toTopOf="@+id/bottomGuideline" />
@@ -102,7 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="471dp" />
+        app:layout_constraintGuide_begin="479dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/topGuideline"
@@ -111,8 +111,8 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="98dp" />
 
-    <CheckBox
-        android:id="@+id/foodCheckBox"
+    <RadioButton
+        android:id="@+id/foodRadioButtom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -121,13 +121,13 @@
         android:layout_marginBottom="8dp"
         android:text="Food"
         app:layout_constraintBottom_toTopOf="@+id/topGuideline"
-        app:layout_constraintEnd_toStartOf="@+id/drinkCheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/drinkRadioButtom"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
-        android:id="@+id/drinkCheckBox"
+    <RadioButton
+        android:id="@+id/drinkRadioButtom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -139,6 +139,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/foodCheckBox"
+        app:layout_constraintStart_toEndOf="@+id/foodRadioButtom"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/myRecipeChechBox"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text=" Search My Recipes only"
+        app:layout_constraintEnd_toStartOf="@+id/searchButton"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bottomGuideline" />
 </android.support.constraint.ConstraintLayout>
