@@ -7,14 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 public class SearchPageActivity extends AppCompatActivity {
     private EditText searchOne;
     private EditText searchTwo;
     private EditText searchThree;
-
-    private CheckBox foodCheckBox;
-    private CheckBox drinkCheckBox;
+    private CheckBox myRecipeCheckBox;
+    private RadioButton foodRadioButtom;
+    private RadioButton drinkRadioButtom;
 
     private String firstIngredient;
     private String secondIngredient;
@@ -37,8 +38,9 @@ public class SearchPageActivity extends AppCompatActivity {
         backButton = findViewById(R.id.backButton);
         logoutButton = findViewById(R.id.logoutButton);
         addRecipeButton = findViewById(R.id.addRecipeButton);
-        foodCheckBox = findViewById(R.id.foodRadioButtom);
-        drinkCheckBox = findViewById(R.id.drinkRadioButtom);
+        foodRadioButtom = findViewById(R.id.foodRadioButtom);
+        drinkRadioButtom = findViewById(R.id.drinkRadioButtom);
+        myRecipeCheckBox = findViewById(R.id.myRecipeChechBox);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
