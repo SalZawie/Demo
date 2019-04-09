@@ -23,7 +23,7 @@ public class OneRecipePage extends AppCompatActivity {
         //Initializing variables
         photo = findViewById(R.id.recipePhoto);
         recipeName = findViewById(R.id.recipeName);
-        ingredients = findViewById(R.id.IngrList);
+        ingredients = findViewById(R.id.ingredients);
         instructions = findViewById(R.id.instructions);
     }
 
