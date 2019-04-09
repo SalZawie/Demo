@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Demo2</string>
     <string name="hello_world">Hello World</string>
-  
+
     <!-->Hints for placeholders<-->
     <string name="hint_recipe_name">Recipe Name</string>
     <string name="hint_enter_recipe">Enter Recipe</string>
@@ -47,6 +47,6 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="hint_for_email">hint for Email</string>
-
+    <string name="enter_your_email_address_here">Enter your email address here...</string>
     <string name="recipe_name">Italian Pizza</string>
 </resources>

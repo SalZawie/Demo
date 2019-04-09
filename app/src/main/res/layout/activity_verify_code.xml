@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible"
+    tools:context=".VerifyCodeActivity">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="365dp"
+        android:layout_height="358dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/whatscookinglogo3" />
+
+    <EditText
+        android:id="@+id/etVerifyCode"
+        android:layout_width="318dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="424dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:ems="10"
+        android:hint="Enter Verification Code here .."
+        android:inputType="text"
+        android:textColor="#288E13"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        android:gravity="center"
+        android:maxLength="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Enter the Code here .." />
+
+    <ImageButton
+        android:id="@+id/imgBtnVerifyCode"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:clickable="true"
+        android:onClick="verifyCode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/verifycode" />
+
+    <TextView
+        android:id="@+id/tvWrongCode"
+        android:layout_width="314dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="552dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:gravity="center"
+        android:text="Code Does Not Match !! \n Please try again..."
+        android:textColor="#EF1515"
+        android:textStyle="bold|italic"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

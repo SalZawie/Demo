@@ -9,10 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".SearchPageActivity"></activity>
+        <activity android:name=".VerifyCodeActivity"></activity>
+        <activity android:name=".AccountRecoveryActivity" />
+        <activity android:name=".SearchPageActivity" />
         <activity android:name=".RecipePageActivity" />
-        <activity android:name=".SignUpActivity"/>
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".AddNewRecipeActivity" />
         <activity android:name=".OneRecipePage" />
         <activity android:name=".DrinkRecipeActivity"></activity>
@@ -20,8 +22,10 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
