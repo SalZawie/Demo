@@ -9,16 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< Updated upstream
         <activity android:name=".SearchPageActivity"></activity>
+=======
+        <activity android:name=".VerifyCodeActivity"></activity>
+        <activity android:name=".AccountRecoveryActivity" />
+        <activity android:name=".SearchPageActivity" />
+>>>>>>> Stashed changes
         <activity android:name=".RecipePageActivity" />
-        <activity android:name=".SignUpActivity"/>
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".AddNewRecipeActivity" />
         <activity android:name=".OneRecipePage" />
+<<<<<<< Updated upstream
+=======
+        <activity android:name=".DrinkRecipeActivity" />
+        <activity android:name=".DrinksPage" />
+>>>>>>> Stashed changes
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
