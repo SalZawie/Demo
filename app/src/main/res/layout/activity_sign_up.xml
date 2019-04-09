@@ -79,7 +79,7 @@
         android:background="@color/colorPrimaryDark"
         android:onClick="validateNameEmailPassword"
         android:text="Submit"
-        android:textColor="@color/whiteColor"
+        android:textColor="@color/colorWhite"
         android:textSize="24sp"
         android:textStyle="bold" />
 
