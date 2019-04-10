@@ -12,21 +12,30 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddNewRecipeActivity extends AppCompatActivity
 {
+    private final FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference mDataBaseRef;
+
     private LinearLayout mLinearLayout;
 
     private EditText mRecipeName;
+    String mStrRecipeName;
     private EditText mEnterRecipe;
+    String mStrRecipeDescription;
 
     private int editTextCounter = 0;
     private static final int MAX_EDITTEXT_LIMIT = 20;
 
     private Button mAddIngredientBtn;
     private Button mBackBtn;
-    private Button mClearAllBtn;
     private Button mSaveRecipeBtn;
 
     @Override
@@ -107,7 +116,7 @@ public class AddNewRecipeActivity extends AppCompatActivity
     }
 
 
-    public ArrayList<String> getAllIngredients()
+    private ArrayList<String> getAllIngredients()
     {
         ArrayList<LinearLayout> linearList = new ArrayList<>();
         ArrayList<String> list = new ArrayList<>();
@@ -135,18 +144,41 @@ public class AddNewRecipeActivity extends AppCompatActivity
         return list;
     }
 
-    public void onSaveData(View view)
+    // Retrieves text values entered by the user for recipe name and description
+    private void setRecipeValues()
     {
-        ArrayList<String> ingredientsList = new ArrayList<>();
-        ingredientsList = getAllIngredients();
+        if(!mRecipeName.getText().toString().isEmpty() && !mEnterRecipe.getText().toString().isEmpty())
+        {
+            assert mRecipeName != null;
+            setRecipeName(mRecipeName.getText().toString());
 
-        Toast.makeText(AddNewRecipeActivity.this, "Recipe Has Been Saved", Toast.LENGTH_SHORT).show();
+            assert mEnterRecipe != null;
+            setRecipeDescription(mEnterRecipe.getText().toString());
+        }
     }
 
-    public void onClearAll(View view)
+    public void onSaveData(View view)
     {
-        mRecipeName.getText().clear();
-        mEnterRecipe.getText().clear();
+        // TODO: 2019-04-09 Add a handler to this method.
+        ArrayList<String> ingredientsList;
+        ingredientsList = getAllIngredients();
+        setRecipeValues();
+
+        // Sets path
+        mDataBaseRef = mDatabase.getReference("recipeapp-wcs/" + getRecipeName());
+
+        String key = mDataBaseRef.push().getKey();
+        DBRecipesModel post = new DBRecipesModel(1, 1, true, getRecipeName(),
+                getRecipeDescription(), ingredientsList);
+
+        Map<String, Object> postValues = post.toRecipeMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/setThisToUserIdOrName/" + key, postValues);
+
+        mDataBaseRef.updateChildren(childUpdates);
+
+        // TODO: 2019-04-09 need to add code to check for successful upload
+        Toast.makeText(AddNewRecipeActivity.this, "Recipe Has Been Saved", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -154,4 +186,10 @@ public class AddNewRecipeActivity extends AppCompatActivity
     {
         mLinearLayout.removeView((View) v.getParent());
     }
+
+    private void setRecipeName(String recipeName) { this.mStrRecipeName = recipeName; }
+    private String getRecipeName(){ return this.mStrRecipeName; }
+
+    private void setRecipeDescription(String recipeDescription) { this.mStrRecipeDescription = recipeDescription; }
+    private String getRecipeDescription() { return this.mStrRecipeDescription; }
 }
