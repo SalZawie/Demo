@@ -6,10 +6,9 @@ import java.util.Map;
 
 public class DBRecipesModel
 {
-    private int mRecipeId;
+    private String mImgURL;
     private int mUserId;
     private boolean mCategory;
-    private String mRecipeName;
     private String mRecipeDescription;
     private ArrayList<String> mIngredientsList = new ArrayList<String>();
 
@@ -18,13 +17,10 @@ public class DBRecipesModel
 
     }
 
-    public DBRecipesModel(int recipeId, int userId, boolean category, String recipeName,
-                          String recipeDescription, ArrayList<String> ingredientsList)
+    public DBRecipesModel(boolean category, String imgURL, String recipeDescription, ArrayList<String> ingredientsList)
     {
-        this.mRecipeId = recipeId;
-        this.mUserId = userId;
         this.mCategory = category;
-        this.mRecipeName = recipeName;
+        this.mImgURL = imgURL;
         this.mRecipeDescription = recipeDescription;
         this.mIngredientsList = ingredientsList;
     }
@@ -33,31 +29,23 @@ public class DBRecipesModel
     {
         HashMap<String, Object> recipeValues = new HashMap<>();
 
-        recipeValues.put("recipeId", getRecipeId());
-        recipeValues.put("userId", getUserId());
         recipeValues.put("category", getCategory());
-        recipeValues.put("rName", getRecipeName());
-        recipeValues.put("rDescription", getRecipeDescription());
+        recipeValues.put("imageURL", getImgURL());
+        recipeValues.put("steps", getRecipeDescription());
         recipeValues.put("ingredients", getIngredientsList());
 
         return recipeValues;
     }
 
-    public void setRecipeId(int id) { this.mRecipeId = id; }
-    private int getRecipeId() { return this.mRecipeId; }
-
-    public void setUserId(int id) { this.mUserId = id; }
-    private int getUserId() { return this.mUserId; }
-
-    public void setCategory(boolean category) { this.mCategory = category; }
+    private void setCategory(boolean category) { this.mCategory = category; }
     private boolean getCategory() { return this.mCategory; }
 
-    public void setRecipeName(String recipeName) { this.mRecipeName = recipeName; }
-    private String getRecipeName() { return this.mRecipeName; }
+    private void setImgURL(String imgURL) { this.mImgURL = imgURL; }
+    private String getImgURL() { return this.mImgURL; }
 
-    public void setRecipeDescription(String recipeDescription) { this.mRecipeDescription = recipeDescription; }
+    private void setRecipeDescription(String recipeDescription) { this.mRecipeDescription = recipeDescription; }
     private String getRecipeDescription() { return this.mRecipeDescription; }
 
-    public void setIngredientsList(ArrayList<String> ingredientsList) { this.mIngredientsList = ingredientsList; }
+    private void setIngredientsList(ArrayList<String> ingredientsList) { this.mIngredientsList = ingredientsList; }
     private ArrayList<String> getIngredientsList() { return this.mIngredientsList; }
 }
