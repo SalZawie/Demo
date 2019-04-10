@@ -15,8 +15,6 @@
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".AddNewRecipeActivity" />
         <activity android:name=".OneRecipePage" />
-        <activity android:name=".DrinkRecipeActivity"></activity>
-        <activity android:name=".DrinksPage" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
