@@ -31,6 +31,8 @@ public class AddNewRecipeActivity extends AppCompatActivity
     private EditText mEnterRecipe;
     String mStrRecipeDescription;
 
+    String mImgURL;
+
     private int editTextCounter = 0;
     private static final int MAX_EDITTEXT_LIMIT = 20;
 
@@ -165,15 +167,16 @@ public class AddNewRecipeActivity extends AppCompatActivity
         setRecipeValues();
 
         // Sets path
-        mDataBaseRef = mDatabase.getReference("recipeapp-wcs/" + getRecipeName());
+        mDataBaseRef = mDatabase.getReference("recipes/" + "userID_Here");
 
+        // Generate dynamic recipe ID
         String key = mDataBaseRef.push().getKey();
-        DBRecipesModel post = new DBRecipesModel(1, 1, true, getRecipeName(),
+        DBRecipesModel post = new DBRecipesModel(true, getImgURL(),
                 getRecipeDescription(), ingredientsList);
 
         Map<String, Object> postValues = post.toRecipeMap();
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/setThisToUserIdOrName/" + key, postValues);
+        childUpdates.put("/" + getRecipeName() + "/" + key, postValues);
 
         mDataBaseRef.updateChildren(childUpdates);
 
@@ -192,4 +195,7 @@ public class AddNewRecipeActivity extends AppCompatActivity
 
     private void setRecipeDescription(String recipeDescription) { this.mStrRecipeDescription = recipeDescription; }
     private String getRecipeDescription() { return this.mStrRecipeDescription; }
+
+    private void setImgURL(String imgURL) { this.mImgURL = imgURL; }
+    private String getImgURL() { return this.mImgURL; }
 }
