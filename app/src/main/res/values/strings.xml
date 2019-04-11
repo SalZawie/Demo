@@ -49,4 +49,9 @@
     <string name="hint_for_email">hint for Email</string>
     <string name="enter_your_email_address_here">Enter your email address here...</string>
     <string name="recipe_name">Italian Pizza</string>
+
+    <!-->Menu items<-->
+    <string name="menu_search">Search a recipe</string>
+
+    
 </resources>
