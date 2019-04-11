@@ -41,16 +41,9 @@ public class AccountRecoveryActivity extends AppCompatActivity
             Toast.makeText(getApplicationContext(), "Input Email Error", Toast.LENGTH_SHORT).show();
         }
         else{
-            if (verifyEmailExist())
-            {
-                resetPassword();
-                Intent intent = new Intent(AccountRecoveryActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-            else
-            {
-                emailDNExist.setVisibility(View.VISIBLE);
-            }
+            resetPassword();
+            Intent intent = new Intent(AccountRecoveryActivity.this, MainActivity.class);
+            startActivity(intent);
         }
 
     }
@@ -74,10 +67,6 @@ public class AccountRecoveryActivity extends AppCompatActivity
         }
         return validated;
     };
-
-    public boolean verifyEmailExist(){
-        return true;
-    }
 
     public void resetPassword(){
         final String email = userEmail.getText().toString();
