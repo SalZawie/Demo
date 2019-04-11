@@ -19,8 +19,7 @@ public class DrinksPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drinks_page);
-
+        setContentView(R.layout.activity_drink_page);
         Intent intent = getIntent();
         final String[] ingredients = intent.getStringArrayExtra("Ingredients");
 

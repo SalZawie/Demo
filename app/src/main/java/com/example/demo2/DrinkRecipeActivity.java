@@ -15,7 +15,7 @@ public class DrinkRecipeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drink_recipe);
+        setContentView(R.layout.activity_recipe_page);
         backButton = findViewById(R.id.backButton);
         logoutButton = findViewById(R.id.logoutButton);
         addRecipeButton = findViewById(R.id.addRecipeButton);

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".RecipePageActivity">
+    tools:context=".DrinksPage">
 
     <ImageView
         android:id="@+id/foodImageView0"
@@ -117,7 +117,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/colorPrimary"
-        android:onClick="onButtonClick"
         android:text="@string/backButtonText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/logoutButton"
@@ -131,7 +130,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/colorPrimary"
-        android:onClick="onButtonClick"
         android:text="@string/addRecipeButtonText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -144,7 +142,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/colorPrimary"
-        android:onClick="onButtonClick"
         android:text="@string/logoutButtonText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/addRecipeButton"
@@ -164,27 +161,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="135dp" />
+        app:layout_constraintGuide_begin="160dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/secondHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="270dp" />
+        app:layout_constraintGuide_begin="330dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/thirdHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="405dp" />
+        app:layout_constraintGuide_begin="500dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/fourthHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="540dp" />
+        app:layout_constraintGuide_begin="670dp" />
 
 </android.support.constraint.ConstraintLayout>
