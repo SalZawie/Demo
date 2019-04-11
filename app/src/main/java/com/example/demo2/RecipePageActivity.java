@@ -1,23 +1,36 @@
 package com.example.demo2;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class RecipePageActivity extends AppCompatActivity {
-    private Button backButton;
-    private Button logoutButton;
-    private Button addRecipeButton;
     private ImageView[] imageViews;
     private TextView[] textViews;
     private static int SIZE = 4;
+
+    // Database variables
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +40,7 @@ public class RecipePageActivity extends AppCompatActivity {
         // Get information from other page
         Intent intent = getIntent();
         final String[] ingredients = intent.getStringArrayExtra("Ingredients");
-        final Set ingredientSet = new HashSet(Arrays.asList(ingredients));
+        Log.d("Debug", Arrays.toString(ingredients));
 
         // Assign some constants
         final String IMAGE_VIEW_NAME = "foodImageView";
@@ -47,34 +60,81 @@ public class RecipePageActivity extends AppCompatActivity {
             textViews[nIndex] = findViewById(nResID);
         }
 
-        // Connect buttons to layout
-        backButton = findViewById(R.id.backButton);
-        logoutButton = findViewById(R.id.logoutButton);
-        addRecipeButton = findViewById(R.id.addRecipeButton);
+        // Database
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("recipes");
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RecipePageActivity.this, SearchPageActivity.class);
-                startActivity(intent);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // All Users
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    // All Recipe IDs
+                    for (DataSnapshot recipeID : snapshot.getChildren()) {
+                        // All Attributes
+                        String recipeName = recipeID.getKey();
+                        for (DataSnapshot attributes : recipeID.getChildren()) {
+                            // If it's in the Food Category
+                            if (attributes.child("category").getValue().equals("true")) {
+                                final String ingredientList = attributes.child("ingredients").getValue().toString();
+                                if (ingredientList.contains(ingredients[0]) && ingredientList.contains(ingredients[1]) && ingredientList.contains(ingredients[2])) {
+                                    textViews[0].setText(attributes.child("ingredients").getValue().toString());
+                                    Picasso.get().load(attributes.child("imageURL").getValue().toString()).into(imageViews[0]);
+
+                                    final Intent saveIntent = new Intent(RecipePageActivity.this, OneRecipePage.class);
+                                    saveIntent.putExtra("recipeName", recipeName);
+                                    saveIntent.putExtra("ingredients", attributes.child("ingredients").getValue().toString());
+                                    saveIntent.putExtra("steps", attributes.child("steps").getValue().toString());
+                                    saveIntent.putExtra("imageURL", attributes.child("imageURL").getValue().toString());
+                                    Log.d("Debug", recipeName);
+                                    Log.d("Debug", attributes.child("ingredients").getValue().toString());
+                                    Log.d("Debug", attributes.child("steps").getValue().toString());
+                                    Log.d("Debug", attributes.child("imageURL").getValue().toString());
+                                    imageViews[0].setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            startActivity(saveIntent);
+                                        }
+                                    });
+                                    textViews[0].setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            startActivity(saveIntent);
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RecipePageActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+    }
 
-        addRecipeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RecipePageActivity.this, AddNewRecipeActivity.class);
+    public void onButtonClick(View view) {
+        Intent intent;
+        switch(view.getId()) {
+            case R.id.backButton:
+                intent = new Intent(RecipePageActivity.this, SearchPageActivity.class);
                 startActivity(intent);
-            }
-        });
+                break;
+            case R.id.logoutButton:
+                intent = new Intent(RecipePageActivity.this, MainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.addRecipeButton:
+                intent = new Intent(RecipePageActivity.this, AddNewRecipeActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 
 }
