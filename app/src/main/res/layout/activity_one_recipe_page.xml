@@ -17,7 +17,6 @@
     tools:context=".OneRecipePage">
 
 
-
     <android.support.constraint.ConstraintLayout
 
         android:id="@+id/constraintLayout"
@@ -41,7 +40,6 @@
         app:layout_constraintStart_toStartOf="parent"
 
         app:layout_constraintTop_toTopOf="parent">
-
 
 
         <TextView
@@ -75,14 +73,13 @@
     </android.support.constraint.ConstraintLayout>
 
 
-
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
 
         android:id="@+id/recipePhoto"
 
-        android:layout_width="0dp"
+        android:layout_width="150dp"
 
-        android:layout_height="0dp"
+        android:layout_height="149dp"
 
         android:layout_marginTop="118dp"
 
@@ -105,7 +102,6 @@
         app:layout_constraintStart_toEndOf="@+id/label_Ingredients"
 
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
     <TextView
@@ -145,7 +141,6 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
 
-
     <TextView
 
         android:id="@+id/ingredients"
@@ -164,10 +159,10 @@
 
         android:layout_marginBottom="10dp"
 
-        android:text="TextView"
-
-        android:textColor="@color/black"
         android:background="@color/colorWhite"
+
+        android:text="TextView"
+        android:textColor="@color/black"
 
         app:layout_constraintBottom_toTopOf="@+id/label_Instructions"
 
@@ -176,7 +171,6 @@
         app:layout_constraintStart_toStartOf="parent"
 
         app:layout_constraintTop_toBottomOf="@+id/label_Ingredients" />
-
 
 
     <TextView
@@ -216,7 +210,6 @@
         app:layout_constraintTop_toBottomOf="@+id/ingredients" />
 
 
-
     <TextView
 
         android:id="@+id/instructions"
@@ -235,9 +228,9 @@
 
         android:layout_marginBottom="80dp"
 
+        android:background="@color/colorWhite"
         android:text="TextView"
         android:textColor="@color/black"
-        android:background="@color/colorWhite"
 
         app:layout_constraintBottom_toBottomOf="parent"
 
@@ -248,9 +241,6 @@
         app:layout_constraintTop_toBottomOf="@+id/label_Instructions" />
 
 
-
-
-
     <Button
 
         android:id="@+id/btnLogout"
@@ -259,10 +249,6 @@
 
         android:layout_height="wrap_content"
 
-        android:layout_marginEnd="11dp"
-
-        android:layout_marginRight="11dp"
-
         android:layout_marginBottom="16dp"
 
         android:background="@color/colorPrimaryDark"
@@ -270,17 +256,10 @@
         android:onClick="logout"
 
         android:text="@string/label_btn_logout"
-
         android:textColor="@color/colorWhite"
-
         app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
-
-        app:layout_constraintStart_toEndOf="@+id/btnBack"
-
-        app:layout_constraintTop_toBottomOf="@+id/recipePhoto" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <Button
@@ -309,8 +288,8 @@
 
         app:layout_constraintEnd_toEndOf="parent"
 
+        app:layout_constraintHorizontal_bias="0.591"
         app:layout_constraintStart_toEndOf="@+id/btnLogout" />
-
 
 
     <Button
