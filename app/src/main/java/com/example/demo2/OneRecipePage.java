@@ -38,6 +38,8 @@ public class OneRecipePage extends AppCompatActivity {
     }
 
     public void displayRecipe(String name, String ingr, String steps, String imgURL){
+        //Clean the ingredients string
+        ingr.substring(1,1);
         recipeName.setText(name);
         ingredients.setText(ingr);
         instructions.setText(steps);
