@@ -43,10 +43,14 @@
     <string name="label_btn_add_ingredient">Add Ingredient</string>
     <string name="label_btn_logout1">LOGOUT</string>
     <string name="label_btn_add1">ADD RECIPE</string>
-
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="hint_for_email">hint for Email</string>
     <string name="enter_your_email_address_here">Enter your email address here...</string>
     <string name="recipe_name">Italian Pizza</string>
+    <string name="radio_group_food">Food</string>
+    <string name="radio_group_drink">Drink</string>
+
+    <!-->Menu items<-->
+    <string name="menu_search">Search a recipe</string>
 </resources>
