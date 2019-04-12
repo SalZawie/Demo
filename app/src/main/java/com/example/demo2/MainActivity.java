@@ -1,11 +1,18 @@
 package com.example.demo2;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
 
@@ -23,6 +30,7 @@ public class MainActivity extends AppCompatActivity
 
     private TextInputLayout userEmail;
     private TextInputLayout passWord;
+    private FirebaseAuth user_auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,6 +40,7 @@ public class MainActivity extends AppCompatActivity
 
         userEmail = (TextInputLayout) findViewById(R.id.txtEmail);
         passWord  = (TextInputLayout) findViewById(R.id.txtPassword);
+        user_auth = FirebaseAuth.getInstance();
     }
 
     public void validateEmailPassword(View v)
@@ -40,9 +49,25 @@ public class MainActivity extends AppCompatActivity
         {
             return;
         }
+        final String email = userEmail.getEditText().getText().toString();
+        final String password = passWord.getEditText().getText().toString();
+        //If fields are NOT EMPTY:
+        user_auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    //If Login is successful check if email is verified:
+                    if(user_auth.getCurrentUser().isEmailVerified()){
+                        Intent intent = new Intent(MainActivity.this, SearchPageActivity.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        //TODO give error if email is not verifed
+                    }
 
-        Intent intent = new Intent(MainActivity.this, SearchPageActivity.class);
-        startActivity(intent);
+                }
+            }
+        });
     }
 
     private boolean validateEmail()
