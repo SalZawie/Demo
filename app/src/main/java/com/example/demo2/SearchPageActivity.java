@@ -49,9 +49,17 @@ public class SearchPageActivity extends AppCompatActivity {
                 secondIngredient = searchTwo.getText().toString().toLowerCase();
                 thirdIngredient = searchThree.getText().toString().toLowerCase();
 
-                Intent intent = new Intent(SearchPageActivity.this, RecipePageActivity.class);
-                intent.putExtra("Ingredients", new String[]{firstIngredient, secondIngredient, thirdIngredient});
-                startActivity(intent);
+                if (foodRadioButtom.isChecked()) {
+                    Intent intent = new Intent(SearchPageActivity.this, RecipePageActivity.class);
+                    intent.putExtra("Ingredients", new String[]{firstIngredient, secondIngredient, thirdIngredient});
+                    startActivity(intent);
+                }
+                else if(drinkRadioButtom.isChecked()) {
+                    Intent intent = new Intent (SearchPageActivity.this, OneRecipePage.class);
+                    intent.putExtra("Ingredients", new String[]{firstIngredient, secondIngredient, thirdIngredient});
+                    startActivity(intent);
+                }
+
             }
         });
 
