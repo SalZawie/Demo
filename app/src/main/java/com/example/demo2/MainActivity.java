@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity
                         startActivity(intent);
                     }
                     else{
-                        //TODO give error if email is not verifed
+                        //TODO give error if email is not verified
                     }
 
                 }

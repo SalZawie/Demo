@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class OneRecipePage extends AppCompatActivity {
 
     //Firebase account:
@@ -25,6 +27,21 @@ public class OneRecipePage extends AppCompatActivity {
         recipeName = findViewById(R.id.recipeName);
         ingredients = findViewById(R.id.ingredients);
         instructions = findViewById(R.id.instructions);
+        //Getting parameters from RecipePageAcivity
+        Intent intent = getIntent();
+        final String strRecipeName = intent.getStringExtra("recipeName");
+        final String strIngredients = intent.getStringExtra("ingredients");
+        final String strSteps = intent.getStringExtra("steps");
+        final String strImageURL = intent.getStringExtra("imageURL");
+        //Display the recipe;
+        displayRecipe(strRecipeName,strIngredients,strSteps,strImageURL);
+    }
+
+    public void displayRecipe(String name, String ingr, String steps, String imgURL){
+        recipeName.setText(name);
+        ingredients.setText(ingr);
+        instructions.setText(steps);
+        Picasso.get().load(imgURL).into(photo);
     }
 
     public void back(View view)
