@@ -144,117 +144,67 @@
     <TextView
 
         android:id="@+id/ingredients"
-
         android:layout_width="0dp"
-
         android:layout_height="0dp"
-
         android:layout_marginStart="25dp"
-
         android:layout_marginLeft="25dp"
-
         android:layout_marginEnd="25dp"
-
         android:layout_marginRight="25dp"
-
         android:layout_marginBottom="10dp"
-
         android:background="@color/colorWhite"
-
         android:text="TextView"
         android:textColor="@color/black"
-
         app:layout_constraintBottom_toTopOf="@+id/label_Instructions"
-
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toBottomOf="@+id/label_Ingredients" />
 
 
     <TextView
-
         android:id="@+id/label_Instructions"
-
         android:layout_width="201dp"
-
         android:layout_height="33dp"
-
         android:layout_marginStart="26dp"
-
         android:layout_marginLeft="26dp"
-
         android:layout_marginEnd="26dp"
-
         android:layout_marginRight="26dp"
-
         android:layout_marginBottom="16dp"
-
         android:text="@string/instructions"
-
         android:textAllCaps="true"
-
         android:textColor="@color/colorPrimaryDark"
-
         android:textSize="20sp"
-
         android:textStyle="bold"
-
         app:layout_constraintBottom_toTopOf="@+id/instructions"
-
         app:layout_constraintEnd_toEndOf="@+id/btnLogout"
-
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toBottomOf="@+id/ingredients" />
 
-
     <TextView
-
         android:id="@+id/instructions"
-
         android:layout_width="0dp"
-
         android:layout_height="0dp"
-
         android:layout_marginStart="26dp"
-
         android:layout_marginLeft="26dp"
-
         android:layout_marginEnd="26dp"
-
         android:layout_marginRight="26dp"
-
         android:layout_marginBottom="80dp"
-
         android:background="@color/colorWhite"
         android:text="TextView"
         android:textColor="@color/black"
-
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toBottomOf="@+id/label_Instructions" />
 
 
     <Button
 
         android:id="@+id/btnLogout"
-
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-
         android:layout_marginBottom="16dp"
-
         android:background="@color/colorPrimaryDark"
-
         android:onClick="logout"
-
         android:text="@string/label_btn_logout"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -263,31 +213,18 @@
 
 
     <Button
-
         android:id="@+id/btnAdd"
-
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-
         android:layout_marginEnd="3dp"
-
         android:layout_marginRight="3dp"
-
         android:layout_marginBottom="16dp"
-
         android:background="@color/colorPrimaryDark"
-
         android:onClick="add"
-
         android:text="@string/label_btn_add"
-
         android:textColor="@color/colorWhite"
-
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintHorizontal_bias="0.591"
         app:layout_constraintStart_toEndOf="@+id/btnLogout" />
 
@@ -295,29 +232,17 @@
     <Button
 
         android:id="@+id/btnBack"
-
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-
         android:layout_marginEnd="13dp"
-
         android:layout_marginRight="13dp"
-
         android:layout_marginBottom="16dp"
-
         android:background="@color/colorPrimaryDark"
-
         android:onClick="back"
-
         android:text="@string/label_btn_back"
-
         android:textColor="@color/colorWhite"
-
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toStartOf="@+id/btnLogout"
-
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
