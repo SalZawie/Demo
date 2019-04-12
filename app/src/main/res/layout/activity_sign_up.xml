@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -73,11 +74,14 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:layout_width="500dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="60dp"
         android:layout_gravity="center"
         android:background="@color/colorPrimaryDark"
-        android:onClick="validateNameEmailPassword"
+        android:onClick="validateNameEmailPasswordInput"
         android:text="Submit"
         android:textColor="@color/colorWhite"
         android:textSize="24sp"
