@@ -7,7 +7,6 @@ import java.util.Map;
 public class DBRecipesModel
 {
     private String mImgURL;
-    private int mUserId;
     private boolean mCategory;
     private String mRecipeDescription;
     private ArrayList<String> mIngredientsList = new ArrayList<String>();

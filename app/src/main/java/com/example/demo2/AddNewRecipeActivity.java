@@ -1,15 +1,14 @@
 package com.example.demo2;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -22,39 +21,39 @@ import java.util.Map;
 public class AddNewRecipeActivity extends AppCompatActivity
 {
     private final FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference mDataBaseRef;
 
     private LinearLayout mLinearLayout;
 
     private EditText mRecipeName;
-    String mStrRecipeName;
-    private EditText mEnterRecipe;
-    String mStrRecipeDescription;
+    private EditText mRecipeDirections;
 
-    String mImgURL;
+    private RadioButton mFoodButton;
 
-    private int editTextCounter = 0;
+    private int editTextCounter = 1;
     private static final int MAX_EDITTEXT_LIMIT = 20;
 
     private Button mAddIngredientBtn;
     private Button mBackBtn;
-    private Button mSaveRecipeBtn;
+
+    static AddRecipeController addRecipeController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_recipe);
 
+        addRecipeController = new AddRecipeController();
+
         mLinearLayout = findViewById(R.id.parent_linear_layout);
 
         // UI elements
         mRecipeName = findViewById(R.id.edittxt_recipe_name);
-        mEnterRecipe = findViewById(R.id.edittxt_recipe_description);
+        mRecipeDirections = findViewById(R.id.edittxt_recipe_description);
+        mFoodButton = findViewById(R.id.radio_btn_food);
 
         // Instantiate Buttons
         mAddIngredientBtn = findViewById(R.id.btn_add_an_ingredient);
         mBackBtn = findViewById(R.id.btn_previous_from_add_new_recipe);
-        mSaveRecipeBtn = findViewById(R.id.btn_save_recipe);
     }
 
     @Override
@@ -73,7 +72,8 @@ public class AddNewRecipeActivity extends AppCompatActivity
             }
             else
             {
-                addNewEditTextField();
+                addRecipeController.addNewEditTextField(mLinearLayout, AddNewRecipeActivity.this);
+                editTextCounter++;
             }
             }
         });
@@ -87,98 +87,42 @@ public class AddNewRecipeActivity extends AppCompatActivity
         });
     }
 
-    private void addNewEditTextField()
+    private void setRecipeData()
     {
-        final Thread extraThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-            try
-            {
-                LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-                final View rowView = inflater.inflate(R.layout.newfield, null);
-
-                assert mLinearLayout != null;
-                mLinearLayout.post(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        mLinearLayout.addView(rowView, mLinearLayout.getChildCount());
-                    }
-                });
-            }
-            catch (NullPointerException ex)
-            {
-                ex.printStackTrace();
-            }
-            }
-        });
-        extraThread.start();
-    }
-
-
-    private ArrayList<String> getAllIngredients()
-    {
-        ArrayList<LinearLayout> linearList = new ArrayList<>();
-        ArrayList<String> list = new ArrayList<>();
-
-        // Adds all children linearlayouts to a list.
-        for(int i = 0; i < mLinearLayout.getChildCount(); i++)
-        {
-            if(mLinearLayout.getChildAt(i) instanceof LinearLayout)
-            {
-                linearList.add((LinearLayout) mLinearLayout.getChildAt(i));
-            }
-        }
-
-        // Targets the edittext fields within the list of linear layouts and get user input.
-        for(int i = 0; i < linearList.size(); i++)
-        {
-            LinearLayout l = linearList.get(i);
-            EditText et = (EditText) l.getChildAt(0);
-
-            if(et.getText().toString() != null || !et.getText().toString().isEmpty())
-            {
-                list.add(et.getText().toString());
-            }
-        }
-        return list;
-    }
-
-    // Retrieves text values entered by the user for recipe name and description
-    private void setRecipeValues()
-    {
-        if(!mRecipeName.getText().toString().isEmpty() && !mEnterRecipe.getText().toString().isEmpty())
-        {
-            assert mRecipeName != null;
-            setRecipeName(mRecipeName.getText().toString());
-
-            assert mEnterRecipe != null;
-            setRecipeDescription(mEnterRecipe.getText().toString());
-        }
+        addRecipeController.setRecipeName(mRecipeName);
+        addRecipeController.setRecipeDescription(mRecipeDirections);
+        addRecipeController.setIsFoodSelected(mFoodButton);
     }
 
     public void onSaveData(View view)
     {
         // TODO: 2019-04-09 Add a handler to this method.
+
         ArrayList<String> ingredientsList;
-        ingredientsList = getAllIngredients();
-        setRecipeValues();
+        ingredientsList = AddRecipeController.getAllIngredients(mLinearLayout);
 
-        // Sets path
-        mDataBaseRef = mDatabase.getReference("recipes/" + "userID_Here");
+        setRecipeData();
 
-        // Generate dynamic recipe ID
-        String key = mDataBaseRef.push().getKey();
-        DBRecipesModel post = new DBRecipesModel(true, getImgURL(),
-                getRecipeDescription(), ingredientsList);
+        if(addRecipeController.getRecipeName() != null && addRecipeController.getRecipeDirections() != null) {
+            // Sets path
+            DatabaseReference mDataBaseRef = mDatabase.getReference("recipes/" + "userID_Here");
 
-        Map<String, Object> postValues = post.toRecipeMap();
-        Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/" + getRecipeName() + "/" + key, postValues);
+            // Generate dynamic recipe ID
+            String key = mDataBaseRef.push().getKey();
+            // Sets data to the database model
+            DBRecipesModel post = new DBRecipesModel(addRecipeController.getIsFoodSelected(), "imgURLPlaceholder",
+                    addRecipeController.getRecipeDirections(), ingredientsList);
 
-        mDataBaseRef.updateChildren(childUpdates);
+            Map<String, Object> postValues = post.toRecipeMap();
+            Map<String, Object> childUpdates = new HashMap<>();
+            childUpdates.put("/" + addRecipeController.getRecipeName() + "/" + key, postValues);
+
+            mDataBaseRef.updateChildren(childUpdates);
+        }
+        else
+        {
+            // TODO: 2019-04-11 add a toast. 
+        }
 
         // TODO: 2019-04-09 need to add code to check for successful upload
         Toast.makeText(AddNewRecipeActivity.this, "Recipe Has Been Saved", Toast.LENGTH_SHORT).show();
@@ -188,14 +132,7 @@ public class AddNewRecipeActivity extends AppCompatActivity
     public void onDelete(View v)
     {
         mLinearLayout.removeView((View) v.getParent());
+
+        editTextCounter = editTextCounter > 0 ? editTextCounter++ : 0;
     }
-
-    private void setRecipeName(String recipeName) { this.mStrRecipeName = recipeName; }
-    private String getRecipeName(){ return this.mStrRecipeName; }
-
-    private void setRecipeDescription(String recipeDescription) { this.mStrRecipeDescription = recipeDescription; }
-    private String getRecipeDescription() { return this.mStrRecipeDescription; }
-
-    private void setImgURL(String imgURL) { this.mImgURL = imgURL; }
-    private String getImgURL() { return this.mImgURL; }
 }
