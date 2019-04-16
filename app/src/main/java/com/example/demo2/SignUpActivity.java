@@ -72,7 +72,6 @@ public class SignUpActivity extends AppCompatActivity
         {
             return;
         }
-
         createFirebaseUser(v);
     }
 
@@ -145,26 +144,32 @@ public class SignUpActivity extends AppCompatActivity
         }
     }
 
-    public void createFirebaseUser(View view){
-        String name  = userName.getEditText().getText().toString().trim() ;
-        String email = userEmail.getEditText().getText().toString().trim();
+    public void createFirebaseUser(View view)
+    {
+        String email    = userEmail.getEditText().getText().toString().trim();
         String password = userPW.getEditText().getText().toString().trim();
+
+        final View userView = view;
 
         user_auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>()
         {
              @Override
              public void onComplete(@NonNull Task<AuthResult> task)
              {
-                  Toast.makeText(SignUpActivity.this,"createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                  //Toast.makeText(SignUpActivity.this,"CreateUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
 
                   if (!task.isSuccessful())
                   {
-                     Toast.makeText(SignUpActivity.this, "Authentication failed." + task.getException(), Toast.LENGTH_SHORT).show();
+                     Toast.makeText(SignUpActivity.this, "Sorry, Authentication has failed." + task.getException(), Toast.LENGTH_SHORT).show();
                   }
                   else
                   {
-                     Toast.makeText(SignUpActivity.this, "You have successfully registered, Please login with your new credentials" + task.getException(), Toast.LENGTH_SHORT).show();
+                     Toast.makeText(SignUpActivity.this, "Congratulations, You have successfully registered. \n " +
+                                                                     "Before you Login with your new credentials, \n"         +
+                                                                     "Please verify your email to activate your account."     +
+                                                                     task.getException(), Toast.LENGTH_SHORT).show();
                      sendVerification();
+                     saveUserToDatabase(userView);
 
                      startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                      finish();
@@ -181,19 +186,18 @@ public class SignUpActivity extends AppCompatActivity
             @Override
             public void onComplete(@NonNull Task<Void> task)
             {
-                Toast.makeText(SignUpActivity.this, "Verification code send to" + current_user.getEmail(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpActivity.this, "A Verification Code was sent to : " + current_user.getEmail(), Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener()
         {
            @Override
            public void onFailure(@NonNull Exception e)
            {
-              Toast.makeText(SignUpActivity.this, "Verification FAILED to sent to" + current_user.getEmail(), Toast.LENGTH_SHORT).show();
+              Toast.makeText(SignUpActivity.this, "Sending a Verification Code to : " + current_user.getEmail() + " has Failed !", Toast.LENGTH_SHORT).show();
            }
         });
     }
 
-/*
     public void saveUserToDatabase(View view) // To Database
     {
         String name   = userName.getEditText().getText().toString() ;
@@ -202,21 +206,13 @@ public class SignUpActivity extends AppCompatActivity
 
         boolean verified = false;
 
-        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) )
-        {
-            String id = firebaseReference.push().getKey();
-            User userObj = new User(id,name,password,email,verified);
-            firebaseReference.child(id).setValue(userObj);
+        String id = firebaseReference.push().getKey();
+        Users userObj = new Users(id,name,email);
+        firebaseReference.child(id).setValue(userObj);
 
-            //Clear the input fields
-            userName.getEditText().setText("") ;
-            userEmail.getEditText().setText("");
-            userPW.getEditText().setText("")   ;
-        }
-        else
-        {
-            Toast.makeText(SignUpActivity.this,"Field(s) are empty",Toast.LENGTH_LONG).show();
-        }
+        //Clear the input fields
+        userName.getEditText().setText("") ;
+        userEmail.getEditText().setText("");
+        userPW.getEditText().setText("")   ;
     }
-*/
 }
