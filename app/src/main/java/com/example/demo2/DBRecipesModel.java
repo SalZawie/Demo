@@ -9,7 +9,7 @@ public class DBRecipesModel
     private String mImgURL;
     private boolean mCategory;
     private String mRecipeDescription;
-    private ArrayList<String> mIngredientsList = new ArrayList<String>();
+    private ArrayList<String> mIngredientsList = new ArrayList<>();
 
     public DBRecipesModel()
     {
@@ -36,15 +36,15 @@ public class DBRecipesModel
         return recipeValues;
     }
 
-    private void setCategory(boolean category) { this.mCategory = category; }
+    //private void setCategory(boolean category) { this.mCategory = category; }
     private boolean getCategory() { return this.mCategory; }
 
-    private void setImgURL(String imgURL) { this.mImgURL = imgURL; }
+    //private void setImgURL(String imgURL) { this.mImgURL = imgURL; }
     private String getImgURL() { return this.mImgURL; }
 
-    private void setRecipeDescription(String recipeDescription) { this.mRecipeDescription = recipeDescription; }
+    //private void setRecipeDescription(String recipeDescription) { this.mRecipeDescription = recipeDescription; }
     private String getRecipeDescription() { return this.mRecipeDescription; }
 
-    private void setIngredientsList(ArrayList<String> ingredientsList) { this.mIngredientsList = ingredientsList; }
+    //private void setIngredientsList(ArrayList<String> ingredientsList) { this.mIngredientsList = ingredientsList; }
     private ArrayList<String> getIngredientsList() { return this.mIngredientsList; }
 }

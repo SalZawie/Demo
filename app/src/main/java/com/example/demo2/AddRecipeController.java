@@ -1,6 +1,9 @@
 package com.example.demo2;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -9,19 +12,43 @@ import android.widget.RadioButton;
 
 import java.util.ArrayList;
 
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddRecipeController
 {
     private String strRecipeName;
     private String strRecipeDirections;
     private boolean isFoodSeleted;
+    private final FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+
+    private EditText mRecipeName;
+
+    private EditText mRecipeDirections;
+
+    private RadioButton mFoodBtn;
+    private boolean isFoodSelected;
+    boolean isPushSuccessful;
+
+    private LinearLayout mLinearLayout;
 
     public AddRecipeController()
     {
 
     }
 
-    public void addNewEditTextField(final LinearLayout linearLayout, final Context context)
+    public AddRecipeController(LinearLayout linearLayout, EditText rName, EditText rDirections, RadioButton foodBtn)
+    {
+        this.mLinearLayout = linearLayout;
+        this.mRecipeName = rName;
+        this.mRecipeDirections = rDirections;
+        this.mFoodBtn = foodBtn;
+    }
+
+    public void addNewEditTextField(final Context context)
     {
         final Thread extraThread = new Thread(new Runnable() {
             @Override
@@ -33,16 +60,16 @@ public class AddRecipeController
 
                     final View rowView = inflater.inflate(R.layout.newfield, null);
 
-                    assert linearLayout != null;
-                    linearLayout.post(new Runnable() {
+                    assert mLinearLayout != null;
+                    mLinearLayout.post(new Runnable() {
                         @Override
                         public void run() {
 
-                            linearLayout.addView(rowView, linearLayout.getChildCount());
+                            mLinearLayout.addView(rowView, mLinearLayout.getChildCount());
                         }
                     });
                 }
-                catch (NullPointerException ex)
+                catch(NullPointerException ex)
                 {
                     ex.printStackTrace();
                 }
@@ -51,46 +78,55 @@ public class AddRecipeController
         extraThread.start();
     }
 
-    public static ArrayList<String> getAllIngredients(LinearLayout linearLayout)
+    public ArrayList<String> getAllIngredients()
     {
-        ArrayList<LinearLayout> linearList = new ArrayList<>();
         ArrayList<String> list = new ArrayList<>();
 
-        // Adds all children linearlayouts to a list.
-        for(int i = 0; i < linearLayout.getChildCount(); i++)
+        for(int i = 0; i < mLinearLayout.getChildCount(); i++)
         {
-            if(linearLayout.getChildAt(i) instanceof LinearLayout)
+            if(mLinearLayout.getChildAt(i) instanceof LinearLayout)
             {
-                linearList.add((LinearLayout) linearLayout.getChildAt(i));
+                LinearLayout l = (LinearLayout) mLinearLayout.getChildAt(i);
+                EditText et = (EditText) l.getChildAt(0);
+
+                if(et.getText().toString() != null && !et.getText().toString().isEmpty() &&
+                        et.getText().toString().trim() != "")
+                {
+                    list.add(et.getText().toString().toLowerCase());
+                }
             }
         }
 
-        // Targets the edittext fields within the list of linear layouts and get user input.
-        for(int i = 0; i < linearList.size(); i++)
-        {
-            LinearLayout l = linearList.get(i);
-            EditText et = (EditText) l.getChildAt(0);
-
-            if(et.getText().toString() != null || !et.getText().toString().isEmpty())
-            {
-                list.add(et.getText().toString().toLowerCase().trim());
-            }
-        }
         return list;
+    }
+
+    public void resetEditTextFields()
+    {
+        mRecipeName.setText("");
+        mRecipeDirections.setText("");
+
+        for(int i = 0; i < mLinearLayout.getChildCount(); i++)
+        {
+            if(mLinearLayout.getChildAt(i) instanceof LinearLayout)
+            {
+                LinearLayout l = (LinearLayout) mLinearLayout.getChildAt(i);
+                EditText et = (EditText) l.getChildAt(0);
+
+                et.setText("");
+            }
+        }
     }
 
     // Retrieves text values entered by the user for recipe name
     public void setRecipeName(EditText recipeName)
     {
-
         this.strRecipeName = !recipeName.getText().toString().isEmpty() ? recipeName.getText().toString() : null;
-
     }
 
     public String getRecipeName() { return this.strRecipeName; }
 
     // Retrieves text values entered by the user for recipe directions
-    public void setRecipeDescription(EditText recipeDirections)
+    public void setRecipeDirections(EditText recipeDirections)
     {
         this.strRecipeDirections = !recipeDirections.getText().toString().isEmpty() ? recipeDirections.getText().toString() : null;
     }
@@ -102,5 +138,70 @@ public class AddRecipeController
         this.isFoodSeleted = rButton.isChecked() ? true : false;
     }
 
-    public Boolean getIsFoodSelected() { return this.isFoodSeleted; }
+    public Boolean getIsFoodSelected() { return this.isFoodSelected; }
+
+    public boolean DbPush()
+    {
+        setRecipeName(mRecipeName);
+        setRecipeDirections(mRecipeDirections);
+        setIsFoodSelected(mFoodBtn);
+
+        ArrayList<String> ingredientsList;
+        ingredientsList = getAllIngredients();
+
+        if(getRecipeName() != null && getRecipeDirections() != null
+                && ingredientsList.size() > 0)
+        {
+            // Sets path
+            DatabaseReference mDataBaseRef = mDatabase.getReference("recipes/" + "userID_Here");
+
+            // Generate dynamic recipe ID
+            String key = mDataBaseRef.push().getKey();
+            // Sets data to the database model
+            DBRecipesModel post = new DBRecipesModel(getIsFoodSelected(), "imgURLPlaceholder",
+                    getRecipeDirections(), ingredientsList);
+
+            Map<String, Object> postValues = post.toRecipeMap();
+            Map<String, Object> childUpdates = new HashMap<>();
+            childUpdates.put("/" + getRecipeName() + "/" + key, postValues);
+
+            mDataBaseRef.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+
+                    if(databaseError == null)
+                    {
+                        /*
+                        Toast toast = Toast.makeText(AddNewRecipeActivity.this, "Recipe Has Been Saved", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                        */
+                        isPushSuccessful = true;
+
+                        resetEditTextFields();
+                    }
+                    else
+                    {
+                        /*
+                        Toast toast = Toast.makeText(AddNewRecipeActivity.this, "There was a problem connecting to the Database", Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                        */
+                        isPushSuccessful = false;
+                    }
+                }
+            });
+        }
+        else
+        {
+            /*
+            Toast toast = Toast.makeText(AddNewRecipeActivity.this, "Recipe Name and Direction can't be empty \n" +
+                    "You must enter at least 1 ingredient", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            */
+        }
+
+        return isPushSuccessful;
+    }
 }
