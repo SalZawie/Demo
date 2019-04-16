@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BasicActivity
 {
     private static final Pattern PASSWORD_PATTERN =
                          Pattern.compile("^" +                //Start of Expression
@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity
 
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();
-
-                    else{
                     }
                 }
                 else
