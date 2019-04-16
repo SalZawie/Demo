@@ -11,23 +11,16 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AddNewRecipeActivity extends AppCompatActivity
 {
-    private final FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-
     private LinearLayout mLinearLayout;
 
     private EditText mRecipeName;
     private EditText mRecipeDirections;
 
     private RadioButton mFoodButton;
+    private RadioButton mDrinkButton;
 
     private int editTextCounter = 1;
     private static final int MAX_EDITTEXT_LIMIT = 20;
@@ -35,7 +28,7 @@ public class AddNewRecipeActivity extends AppCompatActivity
     private Button mAddIngredientBtn;
     private Button mBackBtn;
 
-    static AddRecipeController addRecipeController;
+    AddRecipeController addRecipeController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +43,14 @@ public class AddNewRecipeActivity extends AppCompatActivity
         mRecipeName = findViewById(R.id.edittxt_recipe_name);
         mRecipeDirections = findViewById(R.id.edittxt_recipe_description);
         mFoodButton = findViewById(R.id.radio_btn_food);
+        mDrinkButton = findViewById(R.id.radio_btn_drink);
 
         // Instantiate Buttons
         mAddIngredientBtn = findViewById(R.id.btn_add_an_ingredient);
         mBackBtn = findViewById(R.id.btn_previous_from_add_new_recipe);
+
+        // Access to the activities control Class.
+        addRecipeController = new AddRecipeController(mLinearLayout, mRecipeName, mRecipeDirections, mFoodButton);
     }
 
     @Override
@@ -72,7 +69,7 @@ public class AddNewRecipeActivity extends AppCompatActivity
             }
             else
             {
-                addRecipeController.addNewEditTextField(mLinearLayout, AddNewRecipeActivity.this);
+                addRecipeController.addNewEditTextField(AddNewRecipeActivity.this);
                 editTextCounter++;
             }
             }
@@ -81,52 +78,35 @@ public class AddNewRecipeActivity extends AppCompatActivity
         mBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddNewRecipeActivity.this, MainActivity.class);
+                Intent intent = new Intent(AddNewRecipeActivity.this, SearchPageActivity.class);
                 startActivity(intent);
             }
         });
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+
+        savedInstanceState.putString("recipeName", mRecipeName.getText().toString());
+        savedInstanceState.putString("recipeDirections", mRecipeDirections.getText().toString());
+        savedInstanceState.putBoolean("foodSelected", mFoodButton.isChecked());
+        savedInstanceState.putBoolean("drinkSelected", mDrinkButton.isChecked());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
     private void setRecipeData()
     {
-        addRecipeController.setRecipeName(mRecipeName);
-        addRecipeController.setRecipeDescription(mRecipeDirections);
-        addRecipeController.setIsFoodSelected(mFoodButton);
+        //new UrlPopUp().show(getSupportFragmentManager(), "UrlPopUp");
     }
 
     public void onSaveData(View view)
     {
-        // TODO: 2019-04-09 Add a handler to this method.
-
-        ArrayList<String> ingredientsList;
-        ingredientsList = AddRecipeController.getAllIngredients(mLinearLayout);
-
-        setRecipeData();
-
-        if(addRecipeController.getRecipeName() != null && addRecipeController.getRecipeDirections() != null) {
-            // Sets path
-            DatabaseReference mDataBaseRef = mDatabase.getReference("recipes/" + "userID_Here");
-
-            // Generate dynamic recipe ID
-            String key = mDataBaseRef.push().getKey();
-            // Sets data to the database model
-            DBRecipesModel post = new DBRecipesModel(addRecipeController.getIsFoodSelected(), "imgURLPlaceholder",
-                    addRecipeController.getRecipeDirections(), ingredientsList);
-
-            Map<String, Object> postValues = post.toRecipeMap();
-            Map<String, Object> childUpdates = new HashMap<>();
-            childUpdates.put("/" + addRecipeController.getRecipeName() + "/" + key, postValues);
-
-            mDataBaseRef.updateChildren(childUpdates);
-        }
-        else
-        {
-            // TODO: 2019-04-11 add a toast. 
-        }
-
-        // TODO: 2019-04-09 need to add code to check for successful upload
-        Toast.makeText(AddNewRecipeActivity.this, "Recipe Has Been Saved", Toast.LENGTH_SHORT).show();
-
+        addRecipeController.DbPush();
     }
 
     public void onDelete(View v)
