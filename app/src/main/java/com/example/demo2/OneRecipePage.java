@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-public class OneRecipePage extends AppCompatActivity {
+public class OneRecipePage extends BasicActivity {
 
     //Firebase account:
 
