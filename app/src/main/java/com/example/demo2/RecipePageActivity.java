@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,17 +25,25 @@ public class RecipePageActivity extends AppCompatActivity {
     private TextView[] textViews;
     private Intent OnePageRecipeIntent;
     private int pageLinkCounter = 0;
-    private static int SIZE = 4;
+    private static int SIZE = 4; //TODO don't limit to only four
+    private String category = "true"; //TODO get value from search page
 
     // Database variables
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_page);
+
+        // Get user UID
+        if (user != null) {
+            String uid = user.getUid();
+            Log.d("Debug", uid);
+        }
 
         // Get information from other page
         Intent intent = getIntent();
@@ -68,10 +78,9 @@ public class RecipePageActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                // All Users
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
-                    // All Recipe IDs
                     for (DataSnapshot recipeID : snapshot.getChildren())
                     {
                         // All Attributes
@@ -79,26 +88,29 @@ public class RecipePageActivity extends AppCompatActivity {
                         for (DataSnapshot attributes : recipeID.getChildren())
                         {
                             // If it's in the Food Category
-                            if (attributes.child("category").getValue().equals("true"))
+                            if (attributes.child("category").getValue().equals(category))
                             {
-                                final String ingredientList = attributes.child("ingredients").getValue().toString();
+                                // Switch this to the retrieving part
+                                String ingredientList = attributes.child("ingredients").getValue().toString();
+                                ingredientList = ingredientList.substring(1, ingredientList.length() - 1);
+                                Log.d("Debug-List", ingredientList);
 
                                 // If all three ingredients are in the ingredient list
                                 if (ingredientList.contains(ingredients[0]) && ingredientList.contains(ingredients[1]) && ingredientList.contains(ingredients[2]))
                                 {
-                                    textViews[pageLinkCounter].setText(attributes.child("ingredients").getValue().toString());
-                                    Picasso.get().load(attributes.child("imageURL").getValue().toString()).into(imageViews[pageLinkCounter]);
+                                    textViews[pageLinkCounter].setText(ingredientList);
+                                    Picasso.get().load(attributes.child("imageURL").getValue().toString()).fit().centerCrop().into(imageViews[pageLinkCounter]);
 
                                     // Save this information and pass it to OneRecipePage
                                     OnePageRecipeIntent = new Intent(RecipePageActivity.this, OneRecipePage.class);
                                     OnePageRecipeIntent.putExtra("recipeName", recipeName);
-                                    OnePageRecipeIntent.putExtra("ingredients", attributes.child("ingredients").getValue().toString());
+                                    OnePageRecipeIntent.putExtra("ingredients", ingredientList);
                                     OnePageRecipeIntent.putExtra("steps", attributes.child("steps").getValue().toString());
                                     OnePageRecipeIntent.putExtra("imageURL", attributes.child("imageURL").getValue().toString());
 
                                     // Debug message, erase after
                                     Log.d("Debug", recipeName);
-                                    Log.d("Debug", attributes.child("ingredients").getValue().toString());
+                                    Log.d("Debug", ingredientList);
                                     Log.d("Debug", attributes.child("steps").getValue().toString());
                                     Log.d("Debug", attributes.child("imageURL").getValue().toString());
 
