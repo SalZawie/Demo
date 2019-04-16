@@ -28,16 +28,20 @@ public class BasicActivity extends AppCompatActivity {
                 intent = new Intent(BasicActivity.this, SearchPageActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.menu_signup:
-                intent = new Intent(BasicActivity.this, SignUpActivity.class);
-                startActivity(intent);
-                break;
             case R.id.menu_resetPsw:
                 intent = new Intent(BasicActivity.this, AccountRecoveryActivity.class);
                 startActivity(intent);
                 break;
             case R.id.menu_verification:
                 intent = new Intent(BasicActivity.this, VerifyCodeActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.menu_signup:
+                intent = new Intent(BasicActivity.this, SignUpActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.menu_login:
+                intent = new Intent(BasicActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
             default:

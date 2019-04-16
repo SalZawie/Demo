@@ -50,7 +50,6 @@
     <string name="recipe_name">Italian Pizza</string>
     <string name="radio_group_food">Food</string>
     <string name="radio_group_drink">Drink</string>
+    <string name="verify_email">Verify your email address or \n Sign up with the valid one</string>
 
-    <!-->Menu items<-->
-    <string name="menu_search">Search a recipe</string>
 </resources>

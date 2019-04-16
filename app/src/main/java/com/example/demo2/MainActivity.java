@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
 
-public class MainActivity extends BasicActivity
+public class MainActivity extends LoginMenu
 {
     private static final Pattern PASSWORD_PATTERN =
                          Pattern.compile("^" +                //Start of Expression
