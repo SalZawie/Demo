@@ -2,18 +2,23 @@ package com.example.demo2;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BasicActivity
 {
     private static final Pattern PASSWORD_PATTERN =
                          Pattern.compile("^" +                //Start of Expression
@@ -25,8 +30,9 @@ public class MainActivity extends AppCompatActivity
                                          ".{6,}" +            //at least 6 characters
                                          "$");                //End of Expression
 
-    private EditText userEmail;
-    private EditText passWord;
+    private TextInputLayout userEmail;
+    private TextInputLayout passWord;
+    private FirebaseAuth user_auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,8 +40,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userEmail = (EditText) findViewById(R.id.txtEmail);
-        passWord  = (EditText) findViewById(R.id.txtPassword);
+        userEmail = (TextInputLayout) findViewById(R.id.txtEmail);
+        passWord  = (TextInputLayout) findViewById(R.id.txtPassword);
+        user_auth = FirebaseAuth.getInstance();
     }
 
     public void validateEmailPassword(View v)
@@ -45,13 +52,67 @@ public class MainActivity extends AppCompatActivity
             return;
         }
 
-        Intent intent = new Intent(MainActivity.this, SearchPageActivity.class);
-        startActivity(intent);
+        final String email    = userEmail.getEditText().getText().toString();
+        final String password = passWord.getEditText().getText().toString() ;
+
+        user_auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>()
+        {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task)
+            {
+                if(task.isSuccessful())
+                {
+                    //If Login is successful check if email is verified:
+                    if(user_auth.getCurrentUser().isEmailVerified())
+                    {
+                        Intent intent = new Intent(MainActivity.this, SearchPageActivity.class);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setMessage("Email has not been verified?");
+                        builder.setTitle("Alert !");
+
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                return;
+                            }
+                        });
+
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
+                }
+                else
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+                    builder.setMessage("Invalid Email/Password");
+                    builder.setTitle("Alert !");
+
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            return;
+                        }
+                    });
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+            }
+        });
     }
 
     private boolean validateEmail()
     {
-        String emailInput = userEmail.getText().toString().trim();
+        String emailInput = userEmail.getEditText().getText().toString().trim();
 
         if (emailInput.isEmpty())
         {
@@ -72,7 +133,7 @@ public class MainActivity extends AppCompatActivity
 
     private boolean validatePassword()
     {
-        String passwordInput = passWord.getText().toString().trim();
+        String passwordInput = passWord.getEditText().getText().toString().trim();
 
         if (passwordInput.isEmpty())
         {
