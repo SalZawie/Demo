@@ -99,15 +99,12 @@ public class AddNewRecipeActivity extends AppCompatActivity
         super.onRestoreInstanceState(savedInstanceState);
     }
 
-    private void setRecipeData()
-    {
-        //new UrlPopUp().show(getSupportFragmentManager(), "UrlPopUp");
-    }
 
     public void onSaveData(View view)
     {
         addRecipeController.DbPush();
     }
+
 
     public void onDelete(View v)
     {

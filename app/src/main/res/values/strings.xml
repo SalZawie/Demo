@@ -48,21 +48,15 @@
     <string name="hint_for_email">hint for Email</string>
     <string name="enter_your_email_address_here">Enter your email address here...</string>
     <string name="recipe_name">Italian Pizza</string>
-<<<<<<< HEAD
-
-    <string name="radio_group_food">Food</string>
-    <string name="radio_group_drink">Drink</string>
 
     <string name="header_image_url">WOULD YOU LIKE TO ENTER AN IMAGE URL ?</string>
     <string name="hint_enter_url">enter Url</string>
     <string name="label_btn_enter_image_url">ENTER</string>
     <string name="label_btn_skip_image_url">SKIP</string>
 
-=======
     <string name="radio_group_food">Food</string>
     <string name="radio_group_drink">Drink</string>
 
     <!-->Menu items<-->
     <string name="menu_search">Search a recipe</string>
->>>>>>> 5b8397600528ac6dbb47dff02b5a34daf4c170f7
 </resources>
