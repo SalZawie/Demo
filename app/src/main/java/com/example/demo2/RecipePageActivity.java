@@ -21,17 +21,15 @@ import com.squareup.picasso.Picasso;
 import java.util.Arrays;
 
 public class RecipePageActivity extends AppCompatActivity {
-    private ImageView[] imageViews;
-    private TextView[] textViews;
-    private Intent OnePageRecipeIntent;
-    private int pageLinkCounter = 0;
+    private ImageView[] mImageViews;
+    private TextView[] mTextViews;
+    private Intent mOnePageRecipeIntent;
+    private int mPageLinkCounter = 0;
     private static int SIZE = 4; //TODO don't limit to only four
-    private String category = "true"; //TODO get value from search page
 
     // Database variables
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
-    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,15 +37,12 @@ public class RecipePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_page);
 
-        // Get user UID
-        if (user != null) {
-            String uid = user.getUid();
-            Log.d("Debug", uid);
-        }
-
         // Get information from other page
         Intent intent = getIntent();
         final String[] ingredients = intent.getStringArrayExtra("Ingredients");
+        final boolean category = intent.getExtras().getBoolean("Category");
+        final String user = intent.getStringExtra("User");
+
         Log.d("Debug", Arrays.toString(ingredients));
 
         // Assign some constants
@@ -55,25 +50,25 @@ public class RecipePageActivity extends AppCompatActivity {
         final String TEXT_VIEW_NAME = "foodTextView";
 
         // Create arrays to store information
-        imageViews = new ImageView[SIZE];
-        textViews = new TextView[SIZE];
+        mImageViews = new ImageView[SIZE];
+        mTextViews = new TextView[SIZE];
 
         // Assign values to arrays
         for (int nIndex = 0; nIndex < SIZE; nIndex++)
         {
             int nResID = getResources().getIdentifier(IMAGE_VIEW_NAME +
                     Integer.toString(nIndex), "id", getPackageName());
-            imageViews[nIndex] = findViewById(nResID);
+            mImageViews[nIndex] = findViewById(nResID);
             nResID = getResources().getIdentifier(TEXT_VIEW_NAME +
                     Integer.toString(nIndex), "id", getPackageName());
-            textViews[nIndex] = findViewById(nResID);
+            mTextViews[nIndex] = findViewById(nResID);
         }
 
         // Database
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("recipes");
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference("recipes");
 
-        databaseReference.addValueEventListener(new ValueEventListener()
+        mDatabaseReference.addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
@@ -98,15 +93,15 @@ public class RecipePageActivity extends AppCompatActivity {
                                 // If all three ingredients are in the ingredient list
                                 if (ingredientList.contains(ingredients[0]) && ingredientList.contains(ingredients[1]) && ingredientList.contains(ingredients[2]))
                                 {
-                                    textViews[pageLinkCounter].setText(ingredientList);
-                                    Picasso.get().load(attributes.child("imageURL").getValue().toString()).fit().centerCrop().into(imageViews[pageLinkCounter]);
+                                    mTextViews[mPageLinkCounter].setText(ingredientList);
+                                    Picasso.get().load(attributes.child("imageURL").getValue().toString()).fit().centerCrop().into(mImageViews[mPageLinkCounter]);
 
                                     // Save this information and pass it to OneRecipePage
-                                    OnePageRecipeIntent = new Intent(RecipePageActivity.this, OneRecipePage.class);
-                                    OnePageRecipeIntent.putExtra("recipeName", recipeName);
-                                    OnePageRecipeIntent.putExtra("ingredients", ingredientList);
-                                    OnePageRecipeIntent.putExtra("steps", attributes.child("steps").getValue().toString());
-                                    OnePageRecipeIntent.putExtra("imageURL", attributes.child("imageURL").getValue().toString());
+                                    mOnePageRecipeIntent = new Intent(RecipePageActivity.this, OneRecipePage.class);
+                                    mOnePageRecipeIntent.putExtra("recipeName", recipeName);
+                                    mOnePageRecipeIntent.putExtra("ingredients", ingredientList);
+                                    mOnePageRecipeIntent.putExtra("steps", attributes.child("steps").getValue().toString());
+                                    mOnePageRecipeIntent.putExtra("imageURL", attributes.child("imageURL").getValue().toString());
 
                                     // Debug message, erase after
                                     Log.d("Debug", recipeName);
@@ -115,24 +110,24 @@ public class RecipePageActivity extends AppCompatActivity {
                                     Log.d("Debug", attributes.child("imageURL").getValue().toString());
 
                                     // Click on either ImageView or TextView to go to OneRecipePage
-                                    imageViews[pageLinkCounter].setOnClickListener(new View.OnClickListener()
+                                    mImageViews[mPageLinkCounter].setOnClickListener(new View.OnClickListener()
                                     {
                                         @Override
                                         public void onClick(View v)
                                         {
-                                            startActivity(OnePageRecipeIntent);
+                                            startActivity(mOnePageRecipeIntent);
                                         }
                                     });
-                                    textViews[pageLinkCounter].setOnClickListener(new View.OnClickListener()
+                                    mTextViews[mPageLinkCounter].setOnClickListener(new View.OnClickListener()
                                     {
                                         @Override
                                         public void onClick(View v)
                                         {
-                                            startActivity(OnePageRecipeIntent);
+                                            startActivity(mOnePageRecipeIntent);
                                         }
                                     });
 
-                                    pageLinkCounter++;
+                                    mPageLinkCounter++;
                                 }
                             }
                         }
