@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -12,9 +13,14 @@ import android.widget.RadioButton;
 
 import java.util.ArrayList;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,15 +28,18 @@ public class AddRecipeController
 {
     private String strRecipeName;
     private String strRecipeDirections;
-    private boolean isFoodSeleted;
+    private String strImageUrl;
+    private boolean isFoodSelected;
+
+    private String mUserUid;
+
     private final FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
     private EditText mRecipeName;
-
     private EditText mRecipeDirections;
 
     private RadioButton mFoodBtn;
-    private boolean isFoodSelected;
     boolean isPushSuccessful;
 
     private LinearLayout mLinearLayout;
@@ -135,12 +144,25 @@ public class AddRecipeController
 
     public void setIsFoodSelected(RadioButton rButton)
     {
-        this.isFoodSeleted = rButton.isChecked() ? true : false;
+        this.isFoodSelected = rButton.isChecked() ? true : false;
     }
 
     public Boolean getIsFoodSelected() { return this.isFoodSelected; }
 
-    public boolean DbPush()
+    public void setImageUrl(String imageUrl) { this.strImageUrl = imageUrl; }
+
+    public String getImageUrl() { return this.strImageUrl; }
+
+    public void setUserUid(String userName) { this.mUserUid = userName; }
+
+    public String getUserUid()
+    {
+       this.mUserUid = currentUser.getUid();
+
+       return mUserUid;
+    }
+
+    public void DbPush()
     {
         setRecipeName(mRecipeName);
         setRecipeDirections(mRecipeDirections);
@@ -153,10 +175,10 @@ public class AddRecipeController
                 && ingredientsList.size() > 0)
         {
             // Sets path
-            DatabaseReference mDataBaseRef = mDatabase.getReference("recipes/" + "userID_Here");
+            DatabaseReference dataBaseRef = mDatabase.getReference("recipes/" + getUserUid());
 
             // Generate dynamic recipe ID
-            String key = mDataBaseRef.push().getKey();
+            String key = dataBaseRef.push().getKey();
             // Sets data to the database model
             DBRecipesModel post = new DBRecipesModel(getIsFoodSelected(), "imgURLPlaceholder",
                     getRecipeDirections(), ingredientsList);
@@ -165,7 +187,7 @@ public class AddRecipeController
             Map<String, Object> childUpdates = new HashMap<>();
             childUpdates.put("/" + getRecipeName() + "/" + key, postValues);
 
-            mDataBaseRef.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+            dataBaseRef.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
 
@@ -201,7 +223,5 @@ public class AddRecipeController
             toast.show();
             */
         }
-
-        return isPushSuccessful;
     }
 }
