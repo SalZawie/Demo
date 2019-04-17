@@ -54,9 +54,12 @@
     <string name="label_btn_enter_image_url">ENTER</string>
     <string name="label_btn_skip_image_url">SKIP</string>
 
+
+
+    <string name="verify_email">Verify your email address or \n Sign up with the valid one</string>
     <string name="radio_group_food">Food</string>
     <string name="radio_group_drink">Drink</string>
-
     <!-->Menu items<-->
     <string name="menu_search">Search a recipe</string>
+
 </resources>
