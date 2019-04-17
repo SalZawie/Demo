@@ -57,6 +57,8 @@
     <string name="label_btn_enter_image_url">ENTER</string>
     <string name="label_btn_skip_image_url">SKIP</string>
 
+    <string name="verify_email">Verify your email address or \n Sign up with the valid one</string>
+
     <!-->Menu items<-->
     <string name="menu_search">Search a recipe</string>
 

@@ -30,17 +30,17 @@
         android:layout_marginTop="424dp"
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
+        android:contentDescription="@string/email"
         android:ems="10"
-        android:hint="Enter Verification Code here .."
-        android:inputType="text"
+        android:gravity="center"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:maxLength="5"
         android:textColor="#288E13"
         android:textSize="24sp"
         android:textStyle="bold|italic"
-        android:gravity="center"
-        android:maxLength="5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Enter the Code here .." />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imgBtnVerifyCode"
@@ -50,23 +50,22 @@
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
         android:clickable="true"
-        android:onClick="verifyCode"
+        android:onClick="resendVC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/verifycode" />
 
     <TextView
-        android:id="@+id/tvWrongCode"
+        android:id="@+id/text_verify"
         android:layout_width="314dp"
         android:layout_height="70dp"
         android:layout_marginTop="552dp"
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
         android:gravity="center"
-        android:text="Code Does Not Match !! \n Please try again..."
+        android:text="@string/verify_email"
         android:textColor="#EF1515"
         android:textStyle="bold|italic"
-        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

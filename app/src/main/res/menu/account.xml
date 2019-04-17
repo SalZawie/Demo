@@ -7,14 +7,17 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_account">
         <menu>
-            <item android:id="@+id/menu_signup"
-                android:title="Sign up"
-                app:showAsAction="never"></item>
             <item android:id="@+id/menu_resetPsw"
                 android:title="Reset Password"
                 app:showAsAction="never"></item>
             <item android:id="@+id/menu_verification"
                 android:title="Re-send email verification"
+                app:showAsAction="never"></item>
+            <item android:id="@+id/menu_signup"
+                android:title="Sign up"
+                app:showAsAction="never"></item>
+            <item android:id="@+id/menu_login"
+                android:title="Log In"
                 app:showAsAction="never"></item>
         </menu>
     </item>
