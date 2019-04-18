@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+/* Author: Dan St-Jean, dan.stj@outlook.com */
 
 public class AddNewRecipeActivity extends AppCompatActivity
 {
@@ -18,9 +19,9 @@ public class AddNewRecipeActivity extends AppCompatActivity
 
     private EditText mRecipeName;
     private EditText mRecipeDirections;
+    private EditText mImageUrl;
 
     private RadioButton mFoodButton;
-    private RadioButton mDrinkButton;
 
     private int editTextCounter = 1;
     private static final int MAX_EDITTEXT_LIMIT = 20;
@@ -42,15 +43,16 @@ public class AddNewRecipeActivity extends AppCompatActivity
         // UI elements
         mRecipeName = findViewById(R.id.edittxt_recipe_name);
         mRecipeDirections = findViewById(R.id.edittxt_recipe_description);
+        mImageUrl = findViewById(R.id.edittxt_add_image_url);
+
         mFoodButton = findViewById(R.id.radio_btn_food);
-        mDrinkButton = findViewById(R.id.radio_btn_drink);
 
         // Instantiate Buttons
         mAddIngredientBtn = findViewById(R.id.btn_add_an_ingredient);
         mBackBtn = findViewById(R.id.btn_previous_from_add_new_recipe);
 
         // Access to the activities control Class.
-        addRecipeController = new AddRecipeController(mLinearLayout, mRecipeName, mRecipeDirections, mFoodButton);
+        addRecipeController = new AddRecipeController(mLinearLayout, mRecipeName,mRecipeDirections, mImageUrl, mFoodButton);
     }
 
     @Override
@@ -84,25 +86,33 @@ public class AddNewRecipeActivity extends AppCompatActivity
         });
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-
-        savedInstanceState.putString("recipeName", mRecipeName.getText().toString());
-        savedInstanceState.putString("recipeDirections", mRecipeDirections.getText().toString());
-        savedInstanceState.putBoolean("foodSelected", mFoodButton.isChecked());
-        savedInstanceState.putBoolean("drinkSelected", mDrinkButton.isChecked());
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
 
     public void onSaveData(View view)
     {
-        addRecipeController.DbPush();
+        int returnCode = addRecipeController.DbPush();
+
+        switch(returnCode) {
+            case 1: {
+                // Successfully saved recipe to the database
+                Toast.makeText(AddNewRecipeActivity.this, "Recipe Has Been Saved", Toast.LENGTH_LONG).show();
+
+                break;
+            }
+            case 2: {
+                Toast.makeText(AddNewRecipeActivity.this, "There was a problem connecting to the Database",
+                        Toast.LENGTH_LONG).show();
+
+                break;
+            }
+            case 3: {
+                Toast.makeText(AddNewRecipeActivity.this, "Recipe Name and Direction can't be empty \n" +
+                        "You must enter at least 3 ingredient", Toast.LENGTH_LONG).show();
+
+                break;
+            }
+            default:
+                break;
+        }
     }
 
 
