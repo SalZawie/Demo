@@ -1,16 +1,13 @@
 package com.example.demo2;
 
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,106 +17,93 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 public class RecipePageActivity extends AppCompatActivity {
-    private ImageView[] imageViews;
-    private TextView[] textViews;
-    private static int SIZE = 4;
+    private ImageView[] mImageViews;
+    private TextView[] mTextViews;
+    private Intent mOnePageRecipeIntent;
+    private int mPageLinkCounter = 0;
+    private static int smSIZE = 4; //TODO don't limit to only four
 
     // Database variables
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_page);
 
         // Get information from other page
         Intent intent = getIntent();
         final String[] ingredients = intent.getStringArrayExtra("Ingredients");
-        Log.d("Debug", Arrays.toString(ingredients));
+        final boolean category = intent.getExtras().getBoolean("Category");
+        final String user = intent.getStringExtra("User");
 
         // Assign some constants
         final String IMAGE_VIEW_NAME = "foodImageView";
         final String TEXT_VIEW_NAME = "foodTextView";
 
         // Create arrays to store information
-        imageViews = new ImageView[SIZE];
-        textViews = new TextView[SIZE];
+        mImageViews = new ImageView[smSIZE];
+        mTextViews = new TextView[smSIZE];
 
         // Assign values to arrays
-        for (int nIndex = 0; nIndex < SIZE; nIndex++) {
+        for (int nIndex = 0; nIndex < smSIZE; nIndex++)
+        {
             int nResID = getResources().getIdentifier(IMAGE_VIEW_NAME +
                     Integer.toString(nIndex), "id", getPackageName());
-            imageViews[nIndex] = findViewById(nResID);
+            mImageViews[nIndex] = findViewById(nResID);
             nResID = getResources().getIdentifier(TEXT_VIEW_NAME +
                     Integer.toString(nIndex), "id", getPackageName());
-            textViews[nIndex] = findViewById(nResID);
+            mTextViews[nIndex] = findViewById(nResID);
         }
 
         // Database
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("recipes");
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        if (user.equals("null"))
+        {
+            mDatabaseReference = mFirebaseDatabase.getReference("recipes");
+        }
+        else
+        {
+            mDatabaseReference = mFirebaseDatabase.getReference("recipes").child(user);
+        }
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        mDatabaseReference.addValueEventListener(new ValueEventListener()
+        {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // All Users
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    // All Recipe IDs
-                    for (DataSnapshot recipeID : snapshot.getChildren()) {
-                        // All Attributes
-                        String recipeName = recipeID.getKey();
-                        for (DataSnapshot attributes : recipeID.getChildren()) {
-                            // If it's in the Food Category
-                            if (attributes.child("category").getValue().equals("true")) {
-                                final String ingredientList = attributes.child("ingredients").getValue().toString();
-                                if (ingredientList.contains(ingredients[0]) && ingredientList.contains(ingredients[1]) && ingredientList.contains(ingredients[2])) {
-                                    textViews[0].setText(attributes.child("ingredients").getValue().toString());
-                                    Picasso.get().load(attributes.child("imageURL").getValue().toString()).into(imageViews[0]);
-
-                                    final Intent saveIntent = new Intent(RecipePageActivity.this, OneRecipePage.class);
-                                    saveIntent.putExtra("recipeName", recipeName);
-                                    saveIntent.putExtra("ingredients", attributes.child("ingredients").getValue().toString());
-                                    saveIntent.putExtra("steps", attributes.child("steps").getValue().toString());
-                                    saveIntent.putExtra("imageURL", attributes.child("imageURL").getValue().toString());
-                                    Log.d("Debug", recipeName);
-                                    Log.d("Debug", attributes.child("ingredients").getValue().toString());
-                                    Log.d("Debug", attributes.child("steps").getValue().toString());
-                                    Log.d("Debug", attributes.child("imageURL").getValue().toString());
-                                    imageViews[0].setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            startActivity(saveIntent);
-                                        }
-                                    });
-                                    textViews[0].setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            startActivity(saveIntent);
-                                        }
-                                    });
-                                }
-                            }
-                        }
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                if (user.equals("null"))
+                {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren())
+                    {
+                        searchDatabase(snapshot, category, ingredients);
                     }
+                }
+
+                else
+                {
+                    searchDatabase(dataSnapshot, category, ingredients);
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
+                Log.d("DatabaseError", databaseError.getDetails());
             }
         });
 
     }
 
-    public void onButtonClick(View view) {
+    public void onButtonClick(View view)
+    {
         Intent intent;
-        switch(view.getId()) {
+        switch(view.getId())
+        {
             case R.id.backButton:
                 intent = new Intent(RecipePageActivity.this, SearchPageActivity.class);
                 startActivity(intent);
@@ -137,4 +121,56 @@ public class RecipePageActivity extends AppCompatActivity {
         }
     }
 
+    public void searchDatabase(DataSnapshot snapshot, boolean category, String[] ingredients)
+    {
+        for (DataSnapshot recipeID : snapshot.getChildren())
+        {
+
+            String recipeName = recipeID.getKey();
+            for (DataSnapshot attributes : recipeID.getChildren())
+            {
+
+                if (attributes.child("category").getValue().equals(category))
+                {
+
+                    String ingredientList = attributes.child("ingredients").getValue().toString();
+                    ingredientList = ingredientList.substring(1, ingredientList.length() - 1); // Get rid of the square brackets
+
+                    // If all three ingredients are in the ingredient list
+                    if (ingredientList.contains(ingredients[0]) && ingredientList.contains(ingredients[1]) && ingredientList.contains(ingredients[2]))
+                    {
+                        mTextViews[mPageLinkCounter].setText(ingredientList);
+                        Picasso.get().load(attributes.child("imageURL").getValue().toString()).fit().centerCrop().into(mImageViews[mPageLinkCounter]);
+
+                        // Save this information and pass it to OneRecipePage
+                        mOnePageRecipeIntent = new Intent(RecipePageActivity.this, OneRecipePage.class);
+                        mOnePageRecipeIntent.putExtra("recipeName", recipeName);
+                        mOnePageRecipeIntent.putExtra("ingredients", ingredientList);
+                        mOnePageRecipeIntent.putExtra("steps", attributes.child("steps").getValue().toString());
+                        mOnePageRecipeIntent.putExtra("imageURL", attributes.child("imageURL").getValue().toString());
+
+                        // Click on either ImageView or TextView to go to OneRecipePage
+                        mImageViews[mPageLinkCounter].setOnClickListener(new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                startActivity(mOnePageRecipeIntent);
+                            }
+                        });
+                        mTextViews[mPageLinkCounter].setOnClickListener(new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                startActivity(mOnePageRecipeIntent);
+                            }
+                        });
+
+                        mPageLinkCounter++;
+                    }
+                }
+            }
+        }
+    }
 }
