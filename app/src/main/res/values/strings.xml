@@ -62,5 +62,5 @@
     <!-->Menu items<-->
     <string name="menu_search">Search a recipe</string>
     <string name="hint_add_image_url">URL</string>
-
+    <string name="image_content_description">Food Image</string>
 </resources>

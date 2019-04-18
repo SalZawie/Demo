@@ -1,6 +1,7 @@
 package com.example.demo2;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,12 +19,17 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
 
-public class RecipePageActivity extends AppCompatActivity {
+public class RecipePageActivity extends BasicActivity {
     private ImageView[] mImageViews;
     private TextView[] mTextViews;
     private Intent mOnePageRecipeIntent;
     private int mPageLinkCounter = 0;
     private static int smSIZE = 4; //TODO don't limit to only four
+
+    private String mRecipeName;
+    private String mIngredientList;
+    private String mStep;
+    private String mImageURL;
 
     // Database variables
     private FirebaseDatabase mFirebaseDatabase;
@@ -34,6 +40,7 @@ public class RecipePageActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_page);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // Get information from other page
         Intent intent = getIntent();
@@ -126,51 +133,40 @@ public class RecipePageActivity extends AppCompatActivity {
         for (DataSnapshot recipeID : snapshot.getChildren())
         {
 
-            String recipeName = recipeID.getKey();
-            for (DataSnapshot attributes : recipeID.getChildren())
+            mRecipeName = recipeID.getKey();
+
+            for (final DataSnapshot attributes : recipeID.getChildren())
             {
 
                 if (attributes.child("category").getValue().equals(category))
                 {
 
-                    String ingredientList = attributes.child("ingredients").getValue().toString();
-                    ingredientList = ingredientList.substring(1, ingredientList.length() - 1); // Get rid of the square brackets
+                    mIngredientList = attributes.child("ingredients").getValue().toString();
 
                     // If all three ingredients are in the ingredient list
-                    if (ingredientList.contains(ingredients[0]) && ingredientList.contains(ingredients[1]) && ingredientList.contains(ingredients[2]))
+                    if (mIngredientList.contains(ingredients[0]) && mIngredientList.contains(ingredients[1]) && mIngredientList.contains(ingredients[2]))
                     {
-                        mTextViews[mPageLinkCounter].setText(ingredientList);
+
                         Picasso.get().load(attributes.child("imageURL").getValue().toString()).fit().centerCrop().into(mImageViews[mPageLinkCounter]);
+                        mTextViews[mPageLinkCounter].setText(mRecipeName);
 
-                        // Save this information and pass it to OneRecipePage
-                        mOnePageRecipeIntent = new Intent(RecipePageActivity.this, OneRecipePage.class);
-                        mOnePageRecipeIntent.putExtra("recipeName", recipeName);
-                        mOnePageRecipeIntent.putExtra("ingredients", ingredientList);
-                        mOnePageRecipeIntent.putExtra("steps", attributes.child("steps").getValue().toString());
-                        mOnePageRecipeIntent.putExtra("imageURL", attributes.child("imageURL").getValue().toString());
-
-                        // Click on either ImageView or TextView to go to OneRecipePage
-                        mImageViews[mPageLinkCounter].setOnClickListener(new View.OnClickListener()
-                        {
-                            @Override
-                            public void onClick(View v)
-                            {
-                                startActivity(mOnePageRecipeIntent);
-                            }
-                        });
-                        mTextViews[mPageLinkCounter].setOnClickListener(new View.OnClickListener()
-                        {
-                            @Override
-                            public void onClick(View v)
-                            {
-                                startActivity(mOnePageRecipeIntent);
-                            }
-                        });
+                        mStep = attributes.child("steps").getValue().toString();
+                        mImageURL = attributes.child("imageURL").getValue().toString();
 
                         mPageLinkCounter++;
                     }
                 }
             }
         }
+    }
+
+    public void onImageOrTextClick(View view)
+    {
+        mOnePageRecipeIntent = new Intent(RecipePageActivity.this, OneRecipePage.class);
+        mOnePageRecipeIntent.putExtra("recipeName", mRecipeName);
+        mOnePageRecipeIntent.putExtra("ingredients", mIngredientList);
+        mOnePageRecipeIntent.putExtra("steps", mStep);
+        mOnePageRecipeIntent.putExtra("imageURL", mImageURL);
+        startActivity(mOnePageRecipeIntent);
     }
 }
