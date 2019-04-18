@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/* Author: Dan St-Jean, dan.stj@outlook.com */
+
 public class DBRecipesModel
 {
     private String mImgURL;
