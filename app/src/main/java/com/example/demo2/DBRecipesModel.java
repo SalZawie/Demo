@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/* Author: Dan St-Jean, dan.stj@outlook.com */
+
 public class DBRecipesModel
 {
     private String mImgURL;
@@ -36,15 +38,11 @@ public class DBRecipesModel
         return recipeValues;
     }
 
-    //private void setCategory(boolean category) { this.mCategory = category; }
     private boolean getCategory() { return this.mCategory; }
 
-    //private void setImgURL(String imgURL) { this.mImgURL = imgURL; }
     private String getImgURL() { return this.mImgURL; }
 
-    //private void setRecipeDescription(String recipeDescription) { this.mRecipeDescription = recipeDescription; }
     private String getRecipeDescription() { return this.mRecipeDescription; }
 
-    //private void setIngredientsList(ArrayList<String> ingredientsList) { this.mIngredientsList = ingredientsList; }
     private ArrayList<String> getIngredientsList() { return this.mIngredientsList; }
 }

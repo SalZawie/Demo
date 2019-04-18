@@ -9,6 +9,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class SearchPageActivity extends AppCompatActivity {
     private EditText searchOne;
     private EditText searchTwo;
@@ -16,6 +19,7 @@ public class SearchPageActivity extends AppCompatActivity {
     private CheckBox myRecipeCheckBox;
     private RadioButton foodRadioButtom;
     private RadioButton drinkRadioButtom;
+    private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
     private String firstIngredient;
     private String secondIngredient;
@@ -43,6 +47,7 @@ public class SearchPageActivity extends AppCompatActivity {
         myRecipeCheckBox = findViewById(R.id.myRecipeChechBox);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 firstIngredient = searchOne.getText().toString().toLowerCase();
@@ -52,13 +57,34 @@ public class SearchPageActivity extends AppCompatActivity {
                 if (foodRadioButtom.isChecked()) {
                     Intent intent = new Intent(SearchPageActivity.this, RecipePageActivity.class);
                     intent.putExtra("Ingredients", new String[]{firstIngredient, secondIngredient, thirdIngredient});
+                    intent.putExtra("Category", true);
+
+                    if (myRecipeCheckBox.isChecked()){
+                        intent.putExtra("User", firebaseUser.getUid());
+                    }
+                    else{
+
+                        intent.putExtra("User", "null");
+                    }
+
                     startActivity(intent);
+
                 }
-                else if(drinkRadioButtom.isChecked()) {
-                    Intent intent = new Intent (SearchPageActivity.this, OneRecipePage.class);
+                else if (drinkRadioButtom.isChecked()) {
+                    Intent intent = new Intent (SearchPageActivity.this, RecipePageActivity.class);
                     intent.putExtra("Ingredients", new String[]{firstIngredient, secondIngredient, thirdIngredient});
+                    intent.putExtra("Category", false);
+
+                    if (myRecipeCheckBox.isChecked()){
+                        intent.putExtra("User", firebaseUser.getUid());
+                    }
+                    else{
+
+                        intent.putExtra("User", "null");
+                    }
                     startActivity(intent);
                 }
+
 
             }
         });
@@ -85,5 +111,9 @@ public class SearchPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+
     }
 }
