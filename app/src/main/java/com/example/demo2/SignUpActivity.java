@@ -62,6 +62,7 @@ public class SignUpActivity extends LoginMenu
         userPW    = findViewById(R.id.txtSUPassword);
 
         user_auth = FirebaseAuth.getInstance();
+        current_user = user_auth.getCurrentUser();
 
         firebaseReference = FirebaseDatabase.getInstance().getReference("users");
     }
@@ -160,7 +161,8 @@ public class SignUpActivity extends LoginMenu
 
                   if (!task.isSuccessful())
                   {
-                     Toast.makeText(SignUpActivity.this, "Sorry, Authentication has failed." + task.getException(), Toast.LENGTH_SHORT).show();
+                     Toast.makeText(SignUpActivity.this, "Sorry, Authentication has failed." +
+                                                                      task.getException(), Toast.LENGTH_SHORT).show();
                   }
                   else
                   {
@@ -180,7 +182,6 @@ public class SignUpActivity extends LoginMenu
 
     public void sendVerification()
     {
-        current_user = user_auth.getCurrentUser();
         current_user.sendEmailVerification().addOnCompleteListener(this, new OnCompleteListener<Void>()
         {
             @Override
@@ -202,12 +203,9 @@ public class SignUpActivity extends LoginMenu
     {
         String name   = userName.getEditText().getText().toString() ;
         String email  = userEmail.getEditText().getText().toString();
-        String password = userPW.getEditText().getText().toString() ;
 
-        boolean verified = false;
-
-        String id = firebaseReference.push().getKey();
-        Users userObj = new Users(id,name,email);
+        String id = user_auth.getUid();
+        UsersModel userObj = new UsersModel(name,email);
         firebaseReference.child(id).setValue(userObj);
 
         //Clear the input fields

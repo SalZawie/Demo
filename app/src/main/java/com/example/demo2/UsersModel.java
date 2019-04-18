@@ -1,26 +1,20 @@
 package com.example.demo2;
 
-public class Users
+public class UsersModel
 {
-    private String userId;
     private String userName;
     private String userEmail;
 
-    public Users()
+    public UsersModel()
     {
     }
 
-    public Users(String userId, String userName, String userEmail)
+    public UsersModel(String userName, String userEmail)
     {
-        this.userId    = userId;
         this.userName  = userName;
         this.userEmail = userEmail;
     }
 
-    public String getUserId()
-    {
-        return userId;
-    }
     public String getUserName()
     {
         return userName;
