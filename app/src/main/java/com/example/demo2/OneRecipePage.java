@@ -48,8 +48,7 @@ public class OneRecipePage extends BasicActivity {
 
     public void back(View view)
     {
-        Intent intent = new Intent(OneRecipePage.this, RecipePageActivity.class);
-        startActivity(intent);
+        finish();
     }
 
     public void logout(View view)
