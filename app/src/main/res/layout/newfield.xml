@@ -10,6 +10,8 @@
         android:layout_height="match_parent"
         android:layout_weight="5"
         android:hint="@string/hint_ingredient"
+        android:textSize="@dimen/etxt_box"
+        android:textStyle="bold"
         android:inputType="textShortMessage"/>
 
     <Button
