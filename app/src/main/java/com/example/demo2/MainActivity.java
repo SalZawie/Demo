@@ -119,11 +119,6 @@ public class MainActivity extends LoginMenu
             userEmail.setError("Field can't be empty");
             return false;
         }
-        else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches())
-        {
-            userEmail.setError("Please enter a valid email address");
-            return false;
-        }
         else
         {
             userEmail.setError(null);
@@ -138,17 +133,6 @@ public class MainActivity extends LoginMenu
         if (passwordInput.isEmpty())
         {
             passWord.setError("Field can't be empty");
-            return false;
-        }
-        else if (!PASSWORD_PATTERN.matcher(passwordInput).matches())
-        {
-            passWord.setError("Invalid password format .. \n At least 1 digit" +
-                                                         "\n At least 1 lower case letter"  +
-                                                         "\n At least 1 upper case letter"  +
-                                                         "\n At least 1 special character " +
-                                                         "\n ( @ # $ % ^ & + = )"   +
-                                                         "\n At least 6 characters" +
-                                                         "\n Spaces are not allowed");
             return false;
         }
         else

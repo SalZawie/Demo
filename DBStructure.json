@@ -1,0 +1,106 @@
+{
+	"recipes":
+    {
+    	"id_admin":
+    	{
+    		"Roasted Asparagus":
+    		{
+    			"recipeID_1":
+    			{
+    				"category": "true",
+		            "ingredients": 
+			        [
+			        	"1 lb Asparagus",
+			        	"1 1/2 tbsp of olive oil",
+			        	"1/2 tbsp of kosher salt",
+			        	"1 piece of garlic"         
+			        ],
+			        "steps": "Place the asparagus into a mixing bowl, and drizzle with the olive oil. Toss to coat the spears, then sprinkle with Parmesan cheese, garlic, salt, and pepper. Arrange the asparagus onto a baking sheet in a single layer and roast",
+		       		"imageURL": "http://img.sndimg.com/food/image/upload/w_266/v1/img/recipes/50/84/7/picMcSyVd.jpg"
+    			}
+    		},
+    		"Mojito":
+    		{
+    			"recipeID_2":
+    			{
+    				"category": "false",
+			        "ingredients": 
+			        [
+			        	"10 leaves of mint",
+			        	"1/2 lime",
+			        	"2 tbsp of sugar",
+			        	"1/2 cup of ice",
+			        	"1 1/2 oz of white rum",
+			        	"1/2 cup of soda"
+			        ],
+			        "steps": "Put all liqueur ingredients into shaker. Mix until texture is smooth.Place mint leaves and 1 lime wedge into a sturdy glass.Use a muddler to crush the mint and lime to release the mint oils and lime juice.Train into a chille glass.",
+			    
+			        "imageURL": "https://images.media-allrecipes.com/userphotos/720x405/679757.jpg"
+    			}
+    		},
+    		"Sex on the beach":
+    		{
+    			"recipeID_3":
+    			{
+    				"category": "false",
+			        "ingredients": 
+			        [
+			        	"1 oz of vodka",
+			        	"2/3 oz of peach liqueur",
+			        	"2 oz of cranberry juice",
+			        	"2 oz orange juice",
+			        	"2 scoops of ice",
+			        	"slice of orange"
+			        ],
+			        "steps": "Combine all the ingredients, except for the orange slice in a shaker.Combine all the ingredients, except for the orange slice in a shaker.Shake vigorously for 8 to 10 seconds. Strain into a highball glass containing a few ice cubes using an ice strainer.Garnish with the orange slice and maraschino cherry on a cocktail pick.", 
+			        "imageURL": "https://s7d9.scene7.com/is/image/SAQ/sex-on-the-beach-ec?$saq-fiche-cocktail$"
+    			}
+    		},
+    		"Big Night Pizza":
+    		{
+    			"recipeID_4":
+    			{
+    				"category": "true",
+			        "ingredients": 
+			        [
+			        	"5 teaspoons of yeast",
+			        	"5 cups of flour",
+			        	"4 tablespoons of vegetable oil",
+			        	"2 tablespoons of sugar",
+			        	"2 teaspoons of salt",
+			        	"2 cups of hot water"
+			        ],
+			        "steps":"Add hot water to yeast in a large bowl and let sit for 15 minutes.Mix in oil, sugar, salt, and flour and let sit for 1 hour.Knead the dough and spread onto a pan.Spread pizza sauce and sprinkle cheese. Add any optional toppings as you wish.Bake at 400 deg Fahrenheit for 15 minutes.Enjoiy!", 
+			        "imageURL": "https://www.pamperedchef.ca/iceberg/com/recipe/1129139-lg.jpg"
+    			}
+    		},
+    		"Curried Lentils and Rice":
+    		{
+    			"recipeID_5":
+    			{
+    				"category": "true",
+			        "ingredients": 
+			        [
+			        	"1 quart",
+			        	"1 cup dried green lentils",
+			        	"1/2 cup of basmati rice",
+			        	"curry powder",
+			        	"1 tbsp of salt"
+			        ],
+			        "steps": "Bring broth to a low boil. Add curry powder and salt. Cook lentils for 20 minutes.Add rice and simmer for 20 minutes.Enjoy!", 
+			        "imageURL": "https://tmbnotes.co/image/cache/Concentrates/New%20Concs/Banana-Milkshake_6765-800x800.jpg"
+    			}
+    		}
+    	}
+    },
+    "users":
+	{
+		"id_admin":
+		{
+			"user_name": "admin",
+			"user_id": "id_admin",
+			"user_email": "adminRecipies@gmail.com",
+			"user_password": "iamadmin",
+			"verified": "true"
+		}	}
+}
