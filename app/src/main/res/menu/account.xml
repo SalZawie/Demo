@@ -19,6 +19,9 @@
             <item android:id="@+id/menu_login"
                 android:title="Log In"
                 app:showAsAction="never"></item>
+            <item android:id="@+id/menu_logout"
+                android:title="Log Out"
+                app:showAsAction="never"></item>
         </menu>
     </item>
 </menu>
