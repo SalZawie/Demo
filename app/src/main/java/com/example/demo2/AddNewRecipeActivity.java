@@ -1,6 +1,7 @@
 package com.example.demo2;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -35,6 +36,7 @@ public class AddNewRecipeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_recipe);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         addRecipeController = new AddRecipeController();
 
@@ -80,8 +82,7 @@ public class AddNewRecipeActivity extends AppCompatActivity
         mBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddNewRecipeActivity.this, SearchPageActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }
@@ -89,30 +90,7 @@ public class AddNewRecipeActivity extends AppCompatActivity
 
     public void onSaveData(View view)
     {
-        int returnCode = addRecipeController.DbPush();
-
-        switch(returnCode) {
-            case 1: {
-                // Successfully saved recipe to the database
-                Toast.makeText(AddNewRecipeActivity.this, "Recipe Has Been Saved", Toast.LENGTH_LONG).show();
-
-                break;
-            }
-            case 2: {
-                Toast.makeText(AddNewRecipeActivity.this, "There was a problem connecting to the Database",
-                        Toast.LENGTH_LONG).show();
-
-                break;
-            }
-            case 3: {
-                Toast.makeText(AddNewRecipeActivity.this, "Recipe Name and Direction can't be empty \n" +
-                        "You must enter at least 3 ingredient", Toast.LENGTH_LONG).show();
-
-                break;
-            }
-            default:
-                break;
-        }
+        addRecipeController.DbPush(AddNewRecipeActivity.this);
     }
 
 
