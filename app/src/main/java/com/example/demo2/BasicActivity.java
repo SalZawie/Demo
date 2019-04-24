@@ -6,6 +6,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class BasicActivity extends AppCompatActivity {
 
     @Override
@@ -41,6 +44,11 @@ public class BasicActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.menu_login:
+                intent = new Intent(BasicActivity.this, MainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.menu_logout:
+                FirebaseAuth.getInstance().signOut();
                 intent = new Intent(BasicActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
