@@ -8,11 +8,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SearchPageActivity extends AppCompatActivity {
+public class SearchPageActivity extends BasicActivity {
     private EditText searchOne;
     private EditText searchTwo;
     private EditText searchThree;
@@ -54,36 +55,44 @@ public class SearchPageActivity extends AppCompatActivity {
                 secondIngredient = searchTwo.getText().toString().toLowerCase();
                 thirdIngredient = searchThree.getText().toString().toLowerCase();
 
-                if (foodRadioButtom.isChecked()) {
-                    Intent intent = new Intent(SearchPageActivity.this, RecipePageActivity.class);
-                    intent.putExtra("Ingredients", new String[]{firstIngredient, secondIngredient, thirdIngredient});
-                    intent.putExtra("Category", true);
+                if (firstIngredient.matches("") || secondIngredient.matches("") || thirdIngredient.matches("")) {
 
-                    if (myRecipeCheckBox.isChecked()){
-                        intent.putExtra("User", firebaseUser.getUid());
+                    Toast.makeText(SearchPageActivity.this, "Input Fields Cannot Be Blank", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    if (foodRadioButtom.isChecked()) {
+                        Intent intent = new Intent(SearchPageActivity.this, RecipePageActivity.class);
+                        intent.putExtra("Ingredients", new String[]{firstIngredient, secondIngredient, thirdIngredient});
+                        intent.putExtra("Category", true);
+
+                        if (myRecipeCheckBox.isChecked()){
+                            intent.putExtra("User", firebaseUser.getUid());
+                        }
+                        else{
+
+                            intent.putExtra("User", "null");
+                        }
+
+                        startActivity(intent);
+
                     }
-                    else{
+                    else if (drinkRadioButtom.isChecked()) {
+                        Intent intent = new Intent (SearchPageActivity.this, RecipePageActivity.class);
+                        intent.putExtra("Ingredients", new String[]{firstIngredient, secondIngredient, thirdIngredient});
+                        intent.putExtra("Category", false);
 
-                        intent.putExtra("User", "null");
+                        if (myRecipeCheckBox.isChecked()){
+                            intent.putExtra("User", firebaseUser.getUid());
+                        }
+                        else{
+
+                            intent.putExtra("User", "null");
+                        }
+                        startActivity(intent);
                     }
-
-                    startActivity(intent);
 
                 }
-                else if (drinkRadioButtom.isChecked()) {
-                    Intent intent = new Intent (SearchPageActivity.this, RecipePageActivity.class);
-                    intent.putExtra("Ingredients", new String[]{firstIngredient, secondIngredient, thirdIngredient});
-                    intent.putExtra("Category", false);
 
-                    if (myRecipeCheckBox.isChecked()){
-                        intent.putExtra("User", firebaseUser.getUid());
-                    }
-                    else{
-
-                        intent.putExtra("User", "null");
-                    }
-                    startActivity(intent);
-                }
 
 
             }
@@ -92,8 +101,7 @@ public class SearchPageActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SearchPageActivity.this, MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
