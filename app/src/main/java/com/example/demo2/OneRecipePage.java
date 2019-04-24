@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 public class OneRecipePage extends BasicActivity {
@@ -17,6 +18,7 @@ public class OneRecipePage extends BasicActivity {
     TextView recipeName;
     TextView ingredients;
     TextView instructions;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class OneRecipePage extends BasicActivity {
         recipeName = findViewById(R.id.recipeName);
         ingredients = findViewById(R.id.ingredients);
         instructions = findViewById(R.id.instructions);
+        auth = FirebaseAuth.getInstance();
         //Getting parameters from RecipePageAcivity
         Intent intent = getIntent();
         final String strRecipeName = intent.getStringExtra("recipeName");
@@ -48,12 +51,12 @@ public class OneRecipePage extends BasicActivity {
 
     public void back(View view)
     {
-        Intent intent = new Intent(OneRecipePage.this, RecipePageActivity.class);
-        startActivity(intent);
+        finish();
     }
 
     public void logout(View view)
     {
+        auth.signOut();
         Intent intent = new Intent(OneRecipePage.this, MainActivity.class);
         startActivity(intent);
     }

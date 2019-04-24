@@ -1,21 +1,18 @@
 package com.example.demo2;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -40,8 +37,6 @@ public class AddRecipeController
     private EditText mRecipeDirections;
     private EditText mImageUrl;
     private RadioButton mFoodBtn;
-
-    private int successfulPush;
 
     private LinearLayout mLinearLayout;
 
@@ -144,26 +139,17 @@ public class AddRecipeController
 
     private String getRecipeDirections() { return this.strRecipeDirections; }
 
-    private void setIsFoodSelected(RadioButton rButton)
-    {
-        this.isFoodSelected = rButton.isChecked() ? true : false;
-    }
+    private void setIsFoodSelected(RadioButton rButton) { this.isFoodSelected = rButton.isChecked() ? true : false; }
 
     private Boolean getIsFoodSelected() { return this.isFoodSelected; }
 
-    private void setImageUrl(EditText imageUrl) { this.strImageUrl = !imageUrl.getText().toString().isEmpty() ? imageUrl.getText().toString() : null; }
+    private void setImageUrl(EditText imageUrl) { this.strImageUrl = !imageUrl.getText().toString().isEmpty() ? imageUrl.getText().toString().trim() : null; }
 
     private String getImageUrl() { return this.strImageUrl; }
 
+    private String getUserUid() { return this.mUserUid = currentUser.getUid(); }
 
-    private String getUserUid()
-    {
-       this.mUserUid = currentUser.getUid();
-
-       return mUserUid;
-    }
-
-    public int DbPush()
+    public void DbPush(final Context context)
     {
         setRecipeName(mRecipeName);
         setRecipeDirections(mRecipeDirections);
@@ -194,19 +180,20 @@ public class AddRecipeController
                 public void onSuccess(Void aVoid) {
                     if (aVoid == null)
                     {
-                        successfulPush = 1;
+                        Toast.makeText(context, "Recipe Has Been Saved", Toast.LENGTH_LONG).show();
                         resetEditTextFields();
                     } else {
-                        successfulPush = 2;
+
+                        Toast.makeText(context, "There was a problem connecting to the Database",
+                                Toast.LENGTH_LONG).show();
                     }
                 }
             });
         }
         else
         {
-            successfulPush = 3;
+            Toast.makeText(context, "Recipe Name and Direction can't be empty \n" +
+                    "You must enter at least 3 ingredient", Toast.LENGTH_LONG).show();
         }
-
-        return successfulPush;
     }
 }
