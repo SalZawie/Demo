@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,7 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-public class RecipePageActivity extends BasicActivity {
+public class RecipePageActivity extends BasicActivity
+{
     private ImageView[] mImageViews;
     private TextView[] mTextViews;
     private LinearLayout[] mLinearLayouts;
@@ -34,6 +36,7 @@ public class RecipePageActivity extends BasicActivity {
     // Database variables
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
+    private FirebaseAuth mFirebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -74,6 +77,9 @@ public class RecipePageActivity extends BasicActivity {
             mLinearLayouts[nIndex] = findViewById(nResID);
         }
 
+        // Firebase Auth
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
         // Database
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         if (user.equals("null"))
@@ -90,17 +96,22 @@ public class RecipePageActivity extends BasicActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                if (user.equals("null"))
+                if (mPageLinkCounter < smSIZE)
                 {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren())
+                    if (user.equals("null"))
                     {
-                        searchDatabase(snapshot, category, ingredients);
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren())
+                        {
+                            searchDatabase(snapshot, category, ingredients);
+                            if (mPageLinkCounter >= smSIZE) {
+                                break;
+                            }
+                        }
                     }
-                }
-
-                else
-                {
-                    searchDatabase(dataSnapshot, category, ingredients);
+                    else
+                    {
+                        searchDatabase(dataSnapshot, category, ingredients);
+                    }
                 }
             }
 
@@ -122,6 +133,7 @@ public class RecipePageActivity extends BasicActivity {
                 finish();
                 break;
             case R.id.logoutButton:
+                mFirebaseAuth.signOut();
                 intent = new Intent(RecipePageActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
@@ -136,6 +148,7 @@ public class RecipePageActivity extends BasicActivity {
 
     public void searchDatabase(DataSnapshot snapshot, boolean category, String[] ingredients)
     {
+        Search:
         for (DataSnapshot recipeID : snapshot.getChildren())
         {
 
@@ -172,6 +185,12 @@ public class RecipePageActivity extends BasicActivity {
                         clickToGoToOnePageRecipe(mPageLinkCounter);
 
                         mPageLinkCounter++;
+
+                        if (mPageLinkCounter >= smSIZE)
+                        {
+                            break Search;
+                        }
+
                     }
                 }
             }
