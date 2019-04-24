@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,6 +57,7 @@ public class BasicActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 intent = new Intent(BasicActivity.this, MainActivity.class);
                 startActivity(intent);
+                Toast.makeText(BasicActivity.this,"You are logged out",Toast.LENGTH_LONG).show();
                 break;
             default:
                 return super.onOptionsItemSelected(item);

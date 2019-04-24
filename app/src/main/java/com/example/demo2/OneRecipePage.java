@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
@@ -59,6 +60,7 @@ public class OneRecipePage extends BasicActivity {
     public void logout(View view)
     {
         auth.signOut();
+        Toast.makeText(OneRecipePage.this,"You are logged out",Toast.LENGTH_LONG).show();
         Intent intent = new Intent(OneRecipePage.this, MainActivity.class);
         startActivity(intent);
     }
