@@ -147,7 +147,7 @@ public class SignUpActivity extends LoginMenu
 
     public void createFirebaseUser(View view)
     {
-        String email    = userEmail.getEditText().getText().toString().trim();
+        String email    = userEmail.getEditText().getText().toString().trim().toLowerCase();
         String password = userPW.getEditText().getText().toString().trim();
 
         final View userView = view;
