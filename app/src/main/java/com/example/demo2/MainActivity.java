@@ -20,16 +20,6 @@ import java.util.regex.Pattern;
 
 public class MainActivity extends LoginMenu
 {
-    private static final Pattern PASSWORD_PATTERN =
-                         Pattern.compile("^" +                //Start of Expression
-                                         "(?=.*[0-9])" +      //at least 1 digit
-                                         "(?=.*[a-z])" +      //at least 1 lower case letter
-                                         "(?=.*[A-Z])" +      //at least 1 upper case letter
-                                         "(?=.*[@#$%^&+=])" + //at least 1 special character
-                                         "(?=\\S+$)" +        //no white spaces
-                                         ".{6,}" +            //at least 6 characters
-                                         "$");                //End of Expression
-
     private TextInputLayout userEmail;
     private TextInputLayout passWord;
     private FirebaseAuth user_auth;
@@ -52,7 +42,7 @@ public class MainActivity extends LoginMenu
             return;
         }
 
-        final String email    = userEmail.getEditText().getText().toString();
+        final String email    = userEmail.getEditText().getText().toString().toLowerCase();
         final String password = passWord.getEditText().getText().toString() ;
 
         user_auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>()
