@@ -36,6 +36,7 @@ public class RecipePageActivity extends BasicActivity
     // Database variables
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
+    private FirebaseAuth mFirebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -75,6 +76,9 @@ public class RecipePageActivity extends BasicActivity
             nResID = getResources().getIdentifier(LINEAR_LAYOUT_NAME + Integer.toString(nIndex), "id", getPackageName());
             mLinearLayouts[nIndex] = findViewById(nResID);
         }
+
+        // Firebase Auth
+        mFirebaseAuth = FirebaseAuth.getInstance();
 
         // Database
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -129,6 +133,7 @@ public class RecipePageActivity extends BasicActivity
                 finish();
                 break;
             case R.id.logoutButton:
+                mFirebaseAuth.signOut();
                 intent = new Intent(RecipePageActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
