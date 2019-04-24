@@ -1,5 +1,9 @@
 package com.example.demo2;
 
+/**
+ * This Page is created by Oksana Miller
+ */
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 public class OneRecipePage extends BasicActivity {
-
-    //Firebase account:
 
     ImageView photo;
     TextView recipeName;

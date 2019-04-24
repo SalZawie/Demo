@@ -1,5 +1,10 @@
 package com.example.demo2;
 
+/**
+ * This class is created by Oksana Miller
+ */
+
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
