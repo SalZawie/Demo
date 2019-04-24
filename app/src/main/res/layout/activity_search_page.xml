@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     tools:context=".SearchPageActivity">
 
     <EditText
@@ -11,11 +12,15 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="ingredient #1"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:ems="14"
+        android:hint="@string/ingredient_1"
         android:inputType="textPersonName"
+        android:textSize="@dimen/etxt_box"
         app:layout_constraintBottom_toTopOf="@+id/searchTwo"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/topGuideline" />
 
     <EditText
@@ -24,11 +29,13 @@
         android:layout_height="48dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="ingredient #2"
+        android:ems="14"
+        android:hint="@string/ingredient_2"
         android:inputType="textPersonName"
+        android:textSize="@dimen/etxt_box"
         app:layout_constraintBottom_toTopOf="@+id/searchThree"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchOne" />
 
     <EditText
@@ -37,19 +44,22 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="ingredient #3"
+        android:ems="14"
+        android:hint="@string/ingredient_3"
         android:inputType="textPersonName"
+        android:textSize="@dimen/etxt_box"
         app:layout_constraintBottom_toTopOf="@+id/searchButton"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchTwo" />
 
     <Button
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Back"
+        android:text="@string/backButtonText"
+        android:textSize="@dimen/btn_label_font_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/logoutButton"
         app:layout_constraintHorizontal_bias="0.5"
@@ -60,7 +70,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Logout"
+        android:text="@string/logoutButtonText"
+        android:textSize="@dimen/btn_label_font_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/addRecipeButton"
         app:layout_constraintHorizontal_bias="0.5"
@@ -71,7 +82,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="+"
+        android:text="@string/addRecipeButtonText"
+        android:textSize="@dimen/btn_label_font_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -82,18 +94,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Search"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/search"
+        android:textSize="@dimen/btn_label_font_size"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/bottomGuideline" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/rightGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="395dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/bottomGuideline"
@@ -118,7 +124,8 @@
         android:layout_marginTop="88dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text=" Search My Recipes only"
+        android:text="@string/search_my_recipes_only"
+        android:textSize="@dimen/txt_box_label_h2_font_size"
         app:layout_constraintEnd_toStartOf="@+id/searchButton"
         app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +143,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/topGuideline"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -148,10 +155,10 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Drink"
+            android:text="@string/radio_group_drink"
+            android:textSize="@dimen/txt_box_label_h1_font_size"
             app:layout_constraintBottom_toTopOf="@+id/topGuideline"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/foodRadioButtom"
             app:layout_constraintTop_toTopOf="parent" />
@@ -164,7 +171,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Food"
+            android:checked="true"
+            android:text="@string/radio_group_food"
+            android:textSize="@dimen/txt_box_label_h1_font_size"
             app:layout_constraintBottom_toTopOf="@+id/topGuideline"
             app:layout_constraintEnd_toStartOf="@+id/drinkRadioButtom"
             app:layout_constraintHorizontal_bias="0.5"
