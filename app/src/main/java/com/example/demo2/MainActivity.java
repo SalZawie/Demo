@@ -30,7 +30,7 @@ public class MainActivity extends BasicActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         userEmail = (TextInputLayout) findViewById(R.id.txtEmail);
         passWord  = (TextInputLayout) findViewById(R.id.txtPassword);
         user_auth = FirebaseAuth.getInstance();
