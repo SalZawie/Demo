@@ -12,7 +12,7 @@
     <!-->Labels for buttons<-->
     <string name="label_btn_clear_all_input">CLEAR</string>
     <string name="label_btn_save_info">SAVE</string>
-    <string name="label_btn_back">Search Page</string>
+    <string name="label_btn_back">BACK</string>
 
     <string name="label_btn_logout">Logout</string>
     <string name="label_btn_login">Login</string>
@@ -60,13 +60,14 @@
     <string name="menu_search">Search a recipe</string>
     <string name="hint_add_image_url">URL</string>
 
-
     <string name="ingredient_1">ingredient #1</string>
     <string name="ingredient_2">ingredient #2</string>
     <string name="ingredient_3">ingredient #3</string>
     <string name="search">Search</string>
     <string name="search_my_recipes_only">Search My Recipes only</string>
     <string name="image_content_description">Food Image</string>
+    <string name="password_reseting">Welcome to Password Reseting</string>
+    <string name="btn_reset_password">Reset Password</string>
     <string name="label_btn_add_a_picture">ADD A PICTURE</string>
 
 </resources>
