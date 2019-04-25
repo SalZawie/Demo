@@ -25,8 +25,15 @@ public class BasicActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         user = FirebaseAuth.getInstance().getCurrentUser();
         inflater.inflate(R.menu.account,menu);
+        MenuItem logout_signup = menu.findItem(R.id.menu_logout_signup);
         if( user != null) {
             inflater.inflate(R.menu.menu, menu);
+            //Set menu label to log out
+            logout_signup.setTitle("Log out");
+        }
+        else{
+            //Set menu label to log out
+            logout_signup.setTitle("Sign up");
         }
         return true;
     }
@@ -54,8 +61,6 @@ public class BasicActivity extends AppCompatActivity {
             case R.id.menu_logout_signup:
                 if( user != null) //If user is LOGGED IN
                 {
-                    //Set menu label to log out
-                    item.setTitle("Log out");
                     // DO Log OUT
                     FirebaseAuth.getInstance().signOut();
                     intent = new Intent(BasicActivity.this, MainActivity.class);
@@ -64,8 +69,6 @@ public class BasicActivity extends AppCompatActivity {
                 }
                 else // If USER is NULL
                 {
-                    //Set menu label to log out
-                    item.setTitle("Sign up");
                     intent = new Intent(BasicActivity.this, SignUpActivity.class);
                     startActivity(intent);
                 }
