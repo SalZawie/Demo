@@ -28,6 +28,7 @@ public class AddNewRecipeActivity extends AppCompatActivity
 
     private Button mAddIngredientBtn;
     private Button mBackBtn;
+    private Button mAddPic;
     private RadioButton mFoodButton;
 
     AddRecipeController addRecipeController;
@@ -97,5 +98,10 @@ public class AddNewRecipeActivity extends AppCompatActivity
         mLinearLayout.removeView((View) v.getParent());
 
         editTextCounter = editTextCounter > 0 ? editTextCounter-- : 0;
+    }
+
+    public void addPicture(View view)
+    {
+        Intent intent = new Intent(AddNewRecipeActivity.this, TakePhoto.class);
     }
 }
