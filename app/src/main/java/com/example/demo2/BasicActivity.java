@@ -51,19 +51,24 @@ public class BasicActivity extends AppCompatActivity {
                 intent = new Intent(BasicActivity.this, VerifyCodeActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.menu_signup:
-                intent = new Intent(BasicActivity.this, SignUpActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.menu_login:
-                intent = new Intent(BasicActivity.this, MainActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.menu_logout:
-                FirebaseAuth.getInstance().signOut();
-                intent = new Intent(BasicActivity.this, MainActivity.class);
-                startActivity(intent);
-                Toast.makeText(BasicActivity.this,"You are logged out",Toast.LENGTH_LONG).show();
+            case R.id.menu_logout_signup:
+                if( user != null) //If user is LOGGED IN
+                {
+                    //Set menu label to log out
+                    item.setTitle("Log out");
+                    // DO Log OUT
+                    FirebaseAuth.getInstance().signOut();
+                    intent = new Intent(BasicActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(BasicActivity.this,"You are logged out",Toast.LENGTH_LONG).show();
+                }
+                else // If USER is NULL
+                {
+                    //Set menu label to log out
+                    item.setTitle("Sign up");
+                    intent = new Intent(BasicActivity.this, SignUpActivity.class);
+                    startActivity(intent);
+                }
                 break;
             default:
                 return super.onOptionsItemSelected(item);
