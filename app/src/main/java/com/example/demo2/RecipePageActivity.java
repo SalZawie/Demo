@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +30,7 @@ public class RecipePageActivity extends BasicActivity
     private String[] mImageURL;
 
     private int mPageLinkCounter = 0;
+    private boolean mHasResults = false;
 
     private static String smPICTURE_NOT_AVAILABLE = "https://www.themezzaninegroup.com/wp-content/uploads/2017/12/photo-not-available.jpg";
     private static int smSIZE = 4; //TODO don't limit to only four
@@ -103,14 +105,17 @@ public class RecipePageActivity extends BasicActivity
                         for (DataSnapshot snapshot : dataSnapshot.getChildren())
                         {
                             searchDatabase(snapshot, category, ingredients);
-                            if (mPageLinkCounter >= smSIZE) {
+                            if (mPageLinkCounter >= smSIZE)
+                            {
                                 break;
                             }
                         }
+                        hasResultsMessage();
                     }
                     else
                     {
                         searchDatabase(dataSnapshot, category, ingredients);
+                        hasResultsMessage();
                     }
                 }
             }
@@ -134,6 +139,7 @@ public class RecipePageActivity extends BasicActivity
                 break;
             case R.id.logoutButton:
                 mFirebaseAuth.signOut();
+                Toast.makeText(RecipePageActivity.this, "Log out completed.", Toast.LENGTH_SHORT).show();
                 intent = new Intent(RecipePageActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
@@ -191,6 +197,8 @@ public class RecipePageActivity extends BasicActivity
                             break Search;
                         }
 
+                        mHasResults = true;
+
                     }
                 }
             }
@@ -213,6 +221,14 @@ public class RecipePageActivity extends BasicActivity
                 startActivity(onePageRecipeIntent);
             }
         });
+    }
+
+    public void hasResultsMessage()
+    {
+        if (!mHasResults)
+        {
+            Toast.makeText(RecipePageActivity.this, "No results, try searching other ingredients!", Toast.LENGTH_LONG).show();
+        }
     }
 
 }
