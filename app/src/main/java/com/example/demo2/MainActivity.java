@@ -15,21 +15,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Pattern;
 
-public class MainActivity extends LoginMenu
+public class MainActivity extends BasicActivity
 {
-    private static final Pattern PASSWORD_PATTERN =
-                         Pattern.compile("^" +                //Start of Expression
-                                         "(?=.*[0-9])" +      //at least 1 digit
-                                         "(?=.*[a-z])" +      //at least 1 lower case letter
-                                         "(?=.*[A-Z])" +      //at least 1 upper case letter
-                                         "(?=.*[@#$%^&+=])" + //at least 1 special character
-                                         "(?=\\S+$)" +        //no white spaces
-                                         ".{6,}" +            //at least 6 characters
-                                         "$");                //End of Expression
-
     private TextInputLayout userEmail;
     private TextInputLayout passWord;
     private FirebaseAuth user_auth;
@@ -39,7 +30,7 @@ public class MainActivity extends LoginMenu
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         userEmail = (TextInputLayout) findViewById(R.id.txtEmail);
         passWord  = (TextInputLayout) findViewById(R.id.txtPassword);
         user_auth = FirebaseAuth.getInstance();
@@ -52,7 +43,9 @@ public class MainActivity extends LoginMenu
             return;
         }
 
-        final String email    = userEmail.getEditText().getText().toString();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        final String email    = userEmail.getEditText().getText().toString().toLowerCase();
         final String password = passWord.getEditText().getText().toString() ;
 
         user_auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>()
