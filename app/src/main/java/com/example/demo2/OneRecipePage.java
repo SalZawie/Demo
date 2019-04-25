@@ -5,6 +5,7 @@ package com.example.demo2;
  */
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 public class OneRecipePage extends BasicActivity {
@@ -27,12 +29,14 @@ public class OneRecipePage extends BasicActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_recipe_page);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //Initializing variables
         photo = findViewById(R.id.recipePhoto);
         recipeName = findViewById(R.id.recipeName);
         ingredients = findViewById(R.id.ingredients);
         instructions = findViewById(R.id.instructions);
         auth = FirebaseAuth.getInstance();
+
         //Getting parameters from RecipePageAcivity
         Intent intent = getIntent();
         final String strRecipeName = intent.getStringExtra("recipeName");
