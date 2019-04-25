@@ -139,7 +139,6 @@ public class RecipePageActivity extends BasicActivity
                 break;
             case R.id.logoutButton:
                 mFirebaseAuth.signOut();
-                finish();
                 Toast.makeText(RecipePageActivity.this, "Log out completed.", Toast.LENGTH_SHORT).show();
                 intent = new Intent(RecipePageActivity.this, MainActivity.class);
                 startActivity(intent);
