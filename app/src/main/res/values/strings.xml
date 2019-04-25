@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Demo2</string>
+    <string name="app_name">Cooking Recipes</string>
     <string name="hello_world">Hello World</string>
 
     <!-->Hints for placeholders<-->
@@ -60,15 +60,18 @@
     <string name="menu_search">Search a recipe</string>
     <string name="hint_add_image_url">URL</string>
 
-
     <string name="ingredient_1">ingredient #1</string>
     <string name="ingredient_2">ingredient #2</string>
     <string name="ingredient_3">ingredient #3</string>
     <string name="search">Search</string>
     <string name="search_my_recipes_only">Search My Recipes only</string>
     <string name="image_content_description">Food Image</string>
+
     <string name="add_photo">Add photo to your recipe</string>
     <string name="btn_take_photo">TAKE PHOTO</string>
     <string name="btn_add_photo">Add photo</string>
+
+    <string name="password_reseting">Welcome to Password Reseting</string>
+    <string name="btn_reset_password">Reset Password</string>
 
 </resources>
