@@ -64,6 +64,7 @@ public class OneRecipePage extends BasicActivity {
     public void logout(View view)
     {
         auth.signOut();
+        finish();
         Toast.makeText(OneRecipePage.this,"You are logged out",Toast.LENGTH_LONG).show();
         Intent intent = new Intent(OneRecipePage.this, MainActivity.class);
         startActivity(intent);
