@@ -36,12 +36,8 @@ public class TakePhoto extends AppCompatActivity {
     Uri URI;
 
     public static final int REQUEST_CAPTURE = 1;
-    public static final int REQUEST_TAKE_PHOTO = 1;
-
 
     StorageReference storageRef;
-    FirebaseAuth auth;
-    FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
