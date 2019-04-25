@@ -67,5 +67,8 @@
     <string name="search">Search</string>
     <string name="search_my_recipes_only">Search My Recipes only</string>
     <string name="image_content_description">Food Image</string>
+    <string name="add_photo">Add photo to your recipe</string>
+    <string name="btn_take_photo">TAKE PHOTO</string>
+    <string name="btn_add_photo">Add photo</string>
 
 </resources>
