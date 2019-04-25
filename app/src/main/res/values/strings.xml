@@ -12,7 +12,7 @@
     <!-->Labels for buttons<-->
     <string name="label_btn_clear_all_input">CLEAR</string>
     <string name="label_btn_save_info">SAVE</string>
-    <string name="label_btn_back">BACK</string>
+    <string name="label_btn_back">Search Page</string>
 
     <string name="label_btn_logout">Logout</string>
     <string name="label_btn_login">Login</string>
