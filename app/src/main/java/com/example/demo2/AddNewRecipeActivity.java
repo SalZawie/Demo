@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 /* Author: Dan St-Jean, dan.stj@outlook.com */
 
-public class AddNewRecipeActivity extends AppCompatActivity
+public class AddNewRecipeActivity extends AppCompatActivity 
 {
     private LinearLayout mLinearLayout;
 
