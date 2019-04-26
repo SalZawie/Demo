@@ -1,7 +1,11 @@
 package com.example.demo2;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -32,6 +36,7 @@ public class AddNewRecipeActivity extends AppCompatActivity
     private RadioButton mFoodButton;
 
     AddRecipeController addRecipeController;
+    private BroadcastReceiver myReceiver = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,13 @@ public class AddNewRecipeActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
+
+        myReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                broadcastIntent();
+            }
+        };
 
         mAddIngredientBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +98,9 @@ public class AddNewRecipeActivity extends AppCompatActivity
         });
     }
 
+    public void broadcastIntent() {
+        registerReceiver(myReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
 
     public void onSaveData(View view)
     {
@@ -103,5 +118,6 @@ public class AddNewRecipeActivity extends AppCompatActivity
     public void addPicture(View view)
     {
         Intent intent = new Intent(AddNewRecipeActivity.this, TakePhoto.class);
+        startActivity(intent);
     }
 }
