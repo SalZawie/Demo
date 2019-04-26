@@ -20,7 +20,9 @@ public class SearchPageActivity extends BasicActivity {
     private CheckBox myRecipeCheckBox;
     private RadioButton foodRadioButtom;
     private RadioButton drinkRadioButtom;
-    private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+    private FirebaseUser firebaseUser;
+    private FirebaseAuth firebaseAuth;
 
     private String firstIngredient;
     private String secondIngredient;
@@ -35,6 +37,9 @@ public class SearchPageActivity extends BasicActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_page);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
 
         searchOne = findViewById(R.id.searchOne);
         searchTwo = findViewById(R.id.searchTwo);
@@ -93,8 +98,6 @@ public class SearchPageActivity extends BasicActivity {
 
                 }
 
-
-
             }
         });
 
@@ -108,10 +111,13 @@ public class SearchPageActivity extends BasicActivity {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                firebaseAuth.signOut();
                 Intent intent = new Intent(SearchPageActivity.this, MainActivity.class);
+                Toast.makeText(SearchPageActivity.this, "You are logged out", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
+
         addRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,9 +125,6 @@ public class SearchPageActivity extends BasicActivity {
                 startActivity(intent);
             }
         });
-
-
-
 
     }
 }
