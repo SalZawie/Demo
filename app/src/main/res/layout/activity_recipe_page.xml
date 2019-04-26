@@ -12,7 +12,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalGuide"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -37,7 +37,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/horizontal" />
+        app:layout_constraintTop_toTopOf="@+id/horizontalGuide" />
 
     <Button
         android:id="@+id/addRecipeButton"
@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/logoutButton"
-        app:layout_constraintTop_toTopOf="@+id/horizontal" />
+        app:layout_constraintTop_toTopOf="@+id/horizontalGuide" />
 
     <Button
         android:id="@+id/logoutButton"
@@ -65,10 +65,10 @@
         app:layout_constraintEnd_toStartOf="@+id/addRecipeButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/backButton"
-        app:layout_constraintTop_toTopOf="@+id/horizontal" />
+        app:layout_constraintTop_toTopOf="@+id/horizontalGuide" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/horizontal"
+        android:id="@+id/horizontalGuide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
