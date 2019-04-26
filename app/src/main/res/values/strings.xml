@@ -1,4 +1,78 @@
 <resources>
     <string name="app_name">Demo2</string>
     <string name="hello_world">Hello World</string>
+
+    <!-->Hints for placeholders<-->
+    <string name="hint_recipe_name">Recipe Name</string>
+    <string name="hint_enter_recipe">Enter Recipe</string>
+    <string name="hint_for_name">Email</string>
+    <string name="hint_for_password">Password</string>
+    <string name="hint_forgot_password">Forgot your password?</string>
+
+    <!-->Labels for buttons<-->
+    <string name="label_btn_clear_all_input">CLEAR</string>
+    <string name="label_btn_save_info">SAVE</string>
+    <string name="label_btn_back">BACK</string>
+
+    <string name="label_btn_logout">Logout</string>
+    <string name="label_btn_login">Login</string>
+    <string name="label_btn_sign_up">Sign Up</string>
+    <string name="label_btn_add">Add</string>
+    <string name="label_btn_submit">Submit</string>
+
+    <!-->Labels for the fields to display the elements<-->
+    <string name="instructions">Instructions:</string>
+    <string name="ingredients">Ingredients:</string>
+    <string name="submitButtonText">Submit</string>
+    <string name="backButtonText">Back</string>
+    <string name="logoutButtonText">Logout</string>
+    <string name="addRecipeButtonText">+</string>
+    <string name="add_ingredient_1_text">Add Ingredient #1</string>
+    <string name="add_ingredient_2_text">Add Ingredient #2</string>
+    <string name="add_ingredient_3_text">Add Ingredient #3</string>
+    <string name="search_text">Search</string>
+    <string name="food">Food</string>
+    <string name="drinks">Drinks</string>
+    <string name="search_for">Search for:</string>
+    <string name="txtUserName">Email</string>
+    <string name="txtPassword">Password</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="btn_add_ingredient">Add Ingredient</string>
+    <string name="hint_ingredient">ingredient</string>
+    <string name="label_btn_delete_row">X</string>
+    <string name="label_btn_add_ingredient">Add Ingredient</string>
+    <string name="label_btn_logout1">LOGOUT</string>
+    <string name="label_btn_add1">ADD RECIPE</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="hint_for_email">hint for Email</string>
+    <string name="enter_your_email_address_here">Enter your email address here...</string>
+    <string name="recipe_name">Italian Pizza</string>
+
+    <string name="header_image_url">WOULD YOU LIKE TO ENTER AN IMAGE URL ?</string>
+    <string name="hint_enter_url">enter Url</string>
+    <string name="label_btn_enter_image_url">ENTER</string>
+    <string name="label_btn_skip_image_url">SKIP</string>
+    <string name="verify_email">Verify your email address or \n Sign up with the valid one</string>
+    <string name="radio_group_food">Food</string>
+    <string name="radio_group_drink">Drink</string>
+    <!-->Menu items<-->
+    <string name="menu_search">Search a recipe</string>
+    <string name="hint_add_image_url">URL</string>
+
+    <string name="ingredient_1">ingredient #1</string>
+    <string name="ingredient_2">ingredient #2</string>
+    <string name="ingredient_3">ingredient #3</string>
+    <string name="search">Search</string>
+    <string name="search_my_recipes_only">Search My Recipes only</string>
+    <string name="image_content_description">Food Image</string>
+
+    <string name="add_photo">Add photo to your recipe</string>
+    <string name="btn_take_photo">TAKE PHOTO</string>
+    <string name="btn_add_photo">Add photo</string>
+
+    <string name="password_reseting">Welcome to Password Reseting</string>
+    <string name="btn_reset_password">Reset Password</string>
+    <string name="label_btn_add_a_picture">ADD A PICTURE</string>
+
 </resources>

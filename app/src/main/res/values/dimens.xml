@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="hint_font_size">14sp</dimen>
+    <dimen name="btn_label_font_size">18sp</dimen>
+    <dimen name="txt_box_label_h1_font_size">18sp</dimen>
+    <dimen name="txt_box_label_h2_font_size">18sp</dimen>
+    <dimen name="etxt_box">16sp</dimen>
+</resources>
