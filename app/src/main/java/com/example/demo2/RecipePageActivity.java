@@ -19,26 +19,27 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 public class RecipePageActivity extends BasicActivity
 {
-    private ImageView[] mImageViews;
-    private TextView[] mTextViews;
-    private LinearLayout[] mLinearLayouts;
-    private String[] mRecipeName;
-    private String[] mIngredientList;
-    private String[] mStep;
-    private String[] mImageURL;
+    private ArrayList<ImageView> mImageViews;
+    private ArrayList<TextView> mTextViews;
+    private ArrayList<LinearLayout> mLinearLayouts;
+    private ArrayList<String> mRecipeName;
+    private ArrayList<String> mIngredientList;
+    private ArrayList<String> mStep;
+    private ArrayList<String> mImageURL;
 
-    private int mPageLinkCounter = 0;
-    private boolean mHasResults = false;
-
-    private static String smPICTURE_NOT_AVAILABLE = "https://www.themezzaninegroup.com/wp-content/uploads/2017/12/photo-not-available.jpg";
-    private static int smSIZE = 4; //TODO don't limit to only four
-
-    // Database variables
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
+
+    private int mPageLinkCounter;
+    private boolean mHasResults;
+
+    private static String smPICTURE_NOT_AVAILABLE = "https://www.themezzaninegroup.com/wp-content/uploads/2017/12/photo-not-available.jpg";
+    private static int smSIZE = 4; //TODO don't limit to only four
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,6 +47,17 @@ public class RecipePageActivity extends BasicActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_page);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        // Initialize variables
+        mImageViews = new ArrayList<>();
+        mTextViews = new ArrayList<>();
+        mLinearLayouts = new ArrayList<>();
+        mRecipeName = new ArrayList<>();
+        mIngredientList = new ArrayList<>();
+        mStep = new ArrayList<>();
+        mImageURL = new ArrayList<>();
+        mPageLinkCounter = 0;
+        mHasResults = false;
 
         // Get information from other page
         Intent intent = getIntent();
@@ -58,25 +70,15 @@ public class RecipePageActivity extends BasicActivity
         final String TEXT_VIEW_NAME = "foodTextView";
         final String LINEAR_LAYOUT_NAME = "linearLayout";
 
-        // Create arrays to store information
-        mImageViews = new ImageView[smSIZE];
-        mTextViews = new TextView[smSIZE];
-        mLinearLayouts = new LinearLayout[smSIZE];
-
-        mRecipeName = new String[smSIZE];
-        mIngredientList = new String[smSIZE];
-        mStep = new String[smSIZE];
-        mImageURL = new String[smSIZE];
-
         // Assign values to arrays
         for (int nIndex = 0; nIndex < smSIZE; nIndex++)
         {
-            int nResID = getResources().getIdentifier(IMAGE_VIEW_NAME + Integer.toString(nIndex), "id", getPackageName());
-            mImageViews[nIndex] = findViewById(nResID);
-            nResID = getResources().getIdentifier(TEXT_VIEW_NAME + Integer.toString(nIndex), "id", getPackageName());
-            mTextViews[nIndex] = findViewById(nResID);
-            nResID = getResources().getIdentifier(LINEAR_LAYOUT_NAME + Integer.toString(nIndex), "id", getPackageName());
-            mLinearLayouts[nIndex] = findViewById(nResID);
+            int nResID = getResources().getIdentifier(IMAGE_VIEW_NAME + nIndex, "id", getPackageName());
+            mImageViews.add((ImageView)findViewById(nResID));
+            nResID = getResources().getIdentifier(TEXT_VIEW_NAME + nIndex, "id", getPackageName());
+            mTextViews.add((TextView)findViewById(nResID));
+            nResID = getResources().getIdentifier(LINEAR_LAYOUT_NAME + nIndex, "id", getPackageName());
+            mLinearLayouts.add((LinearLayout)findViewById(nResID));
         }
 
         // Firebase Auth
@@ -139,7 +141,7 @@ public class RecipePageActivity extends BasicActivity
                 break;
             case R.id.logoutButton:
                 mFirebaseAuth.signOut();
-                Toast.makeText(RecipePageActivity.this, "Log out completed.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecipePageActivity.this, "You are logged out", Toast.LENGTH_SHORT).show();
                 intent = new Intent(RecipePageActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
@@ -157,7 +159,6 @@ public class RecipePageActivity extends BasicActivity
         Search:
         for (DataSnapshot recipeID : snapshot.getChildren())
         {
-
             String recipeName = recipeID.getKey();
 
             for (final DataSnapshot attributes : recipeID.getChildren())
@@ -165,28 +166,27 @@ public class RecipePageActivity extends BasicActivity
 
                 if (attributes.child("category").getValue().equals(category))
                 {
-
                     String ingredientList = attributes.child("ingredients").getValue().toString();
 
                     // If all three ingredients are in the ingredient list
                     if (ingredientList.contains(ingredients[0]) && ingredientList.contains(ingredients[1]) && ingredientList.contains(ingredients[2]))
                     {
-                        mRecipeName[mPageLinkCounter] = recipeName;
-                        mIngredientList[mPageLinkCounter] = ingredientList;
+                        mRecipeName.add(recipeName);
+                        mIngredientList.add(ingredientList);
 
                         try
                         {
-                            Picasso.get().load(attributes.child("imageURL").getValue().toString()).fit().centerCrop().into(mImageViews[mPageLinkCounter]);
-                            mImageURL[mPageLinkCounter] = attributes.child("imageURL").getValue().toString();
+                            Picasso.get().load(attributes.child("imageURL").getValue().toString()).fit().centerCrop().into(mImageViews.get(mPageLinkCounter));
+                            mImageURL.add(attributes.child("imageURL").getValue().toString());
                         }
                         catch (Exception e)
                         {
-                            Picasso.get().load(smPICTURE_NOT_AVAILABLE).fit().centerCrop().into(mImageViews[mPageLinkCounter]);
-                            mImageURL[mPageLinkCounter] = smPICTURE_NOT_AVAILABLE;
+                            Picasso.get().load(smPICTURE_NOT_AVAILABLE).fit().centerCrop().into(mImageViews.get(mPageLinkCounter));
+                            mImageURL.add(smPICTURE_NOT_AVAILABLE);
                         }
 
-                        mTextViews[mPageLinkCounter].setText(mRecipeName[mPageLinkCounter]);
-                        mStep[mPageLinkCounter] = attributes.child("steps").getValue().toString();
+                        mTextViews.get(mPageLinkCounter).setText(mRecipeName.get(mPageLinkCounter));
+                        mStep.add(attributes.child("steps").getValue().toString());
 
                         clickToGoToOnePageRecipe(mPageLinkCounter);
 
@@ -207,16 +207,17 @@ public class RecipePageActivity extends BasicActivity
 
     public void clickToGoToOnePageRecipe(final int counter)
     {
-        mLinearLayouts[counter].setOnClickListener(new View.OnClickListener()
+        mLinearLayouts.get(counter).setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 Intent onePageRecipeIntent = new Intent(RecipePageActivity.this, OneRecipePage.class);
-                onePageRecipeIntent.putExtra("recipeName", mRecipeName[counter]);
-                onePageRecipeIntent.putExtra("ingredients", mIngredientList[counter]);
-                onePageRecipeIntent.putExtra("steps", mStep[counter]);
-                onePageRecipeIntent.putExtra("imageURL", mImageURL[counter]);
+
+                onePageRecipeIntent.putExtra("recipeName", mRecipeName.get(counter));
+                onePageRecipeIntent.putExtra("ingredients", mIngredientList.get(counter));
+                onePageRecipeIntent.putExtra("steps", mStep.get(counter));
+                onePageRecipeIntent.putExtra("imageURL", mImageURL.get(counter));
 
                 startActivity(onePageRecipeIntent);
             }
