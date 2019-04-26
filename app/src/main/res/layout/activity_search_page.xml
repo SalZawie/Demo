@@ -9,7 +9,7 @@
 
     <EditText
         android:id="@+id/searchOne"
-        android:layout_width="330dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -24,7 +24,7 @@
 
     <EditText
         android:id="@+id/searchTwo"
-        android:layout_width="330dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -38,7 +38,7 @@
 
     <EditText
         android:id="@+id/searchThree"
-        android:layout_width="330dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
