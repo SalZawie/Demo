@@ -3,9 +3,11 @@ package com.example.demo2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Point;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +43,7 @@ public class RecipePageActivity extends BasicActivity
     private int mPageLinkCounter;
     private boolean mHasResults;
 
-    private static String smPICTURE_NOT_AVAILABLE = "https://www.themezzaninegroup.com/wp-content/uploads/2017/12/photo-not-available.jpg";
+    private static String smPICTURE_NOT_AVAILABLE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -59,6 +61,7 @@ public class RecipePageActivity extends BasicActivity
         mImageURL = new ArrayList<>();
         mPageLinkCounter = 0;
         mHasResults = false;
+        smPICTURE_NOT_AVAILABLE = "https://www.themezzaninegroup.com/wp-content/uploads/2017/12/photo-not-available.jpg";
 
         // Get information from other page
         Intent intent = getIntent();
@@ -107,29 +110,6 @@ public class RecipePageActivity extends BasicActivity
             }
         });
 
-    }
-
-    public void onButtonClick(View view)
-    {
-        Intent intent;
-        switch(view.getId())
-        {
-            case R.id.backButton:
-                finish();
-                break;
-            case R.id.logoutButton:
-                mFirebaseAuth.signOut();
-                Toast.makeText(RecipePageActivity.this, "You are logged out", Toast.LENGTH_SHORT).show();
-                intent = new Intent(RecipePageActivity.this, MainActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.addRecipeButton:
-                intent = new Intent(RecipePageActivity.this, AddNewRecipeActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
     }
 
     public void searchDatabase(DataSnapshot snapshot, boolean category, String[] ingredients)
@@ -187,16 +167,50 @@ public class RecipePageActivity extends BasicActivity
             @Override
             public void onClick(View v)
             {
-                Intent onePageRecipeIntent = new Intent(RecipePageActivity.this, OneRecipePage.class);
-
-                onePageRecipeIntent.putExtra("recipeName", mRecipeName.get(counter));
-                onePageRecipeIntent.putExtra("ingredients", mIngredientList.get(counter));
-                onePageRecipeIntent.putExtra("steps", mStep.get(counter));
-                onePageRecipeIntent.putExtra("imageURL", mImageURL.get(counter));
-
-                startActivity(onePageRecipeIntent);
+                onePageInformation(counter);
             }
         });
+
+        mTextViews.get(counter).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                onePageInformation(counter);
+            }
+        });
+    }
+
+    public void onePageInformation(int counter)
+    {
+        Intent onePageRecipeIntent = new Intent(RecipePageActivity.this, OneRecipePage.class);
+
+        onePageRecipeIntent.putExtra("recipeName", mRecipeName.get(counter));
+        onePageRecipeIntent.putExtra("ingredients", mIngredientList.get(counter));
+        onePageRecipeIntent.putExtra("steps", mStep.get(counter));
+        onePageRecipeIntent.putExtra("imageURL", mImageURL.get(counter));
+
+        startActivity(onePageRecipeIntent);
+    }
+
+    public void addSearchResult(Context context)
+    {
+        LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LinearLayout linearLayout = findViewById(R.id.resultLayout);
+        LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.result, null);
+
+        // Get screen size
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        int height = size.y / 5;
+        layout.setMinimumHeight(height);
+
+        linearLayout.addView(layout, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        mImageViews.add((ImageView)findViewById(R.id.resultImageView));
+        mTextViews.add((TextView)findViewById(R.id.resultTextView));
     }
 
     public void hasResultsMessage()
@@ -207,17 +221,27 @@ public class RecipePageActivity extends BasicActivity
         }
     }
 
-    public void addSearchResult(Context context)
+    public void onButtonClick(View view)
     {
-        LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LinearLayout linearLayout = findViewById(R.id.resultLayout);
-
-        LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.result, null);
-        layout.setMinimumHeight(320);
-        linearLayout.addView(layout, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
-        mImageViews.add((ImageView)findViewById(R.id.resultImageView));
-        mTextViews.add((TextView)findViewById(R.id.resultTextView));
+        Intent intent;
+        switch(view.getId())
+        {
+            case R.id.backButton:
+                finish();
+                break;
+            case R.id.logoutButton:
+                mFirebaseAuth.signOut();
+                Toast.makeText(RecipePageActivity.this, "You are logged out", Toast.LENGTH_SHORT).show();
+                intent = new Intent(RecipePageActivity.this, MainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.addRecipeButton:
+                intent = new Intent(RecipePageActivity.this, AddNewRecipeActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 
 }
