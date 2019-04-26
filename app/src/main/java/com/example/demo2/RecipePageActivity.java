@@ -1,11 +1,15 @@
 package com.example.demo2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,7 +29,6 @@ public class RecipePageActivity extends BasicActivity
 {
     private ArrayList<ImageView> mImageViews;
     private ArrayList<TextView> mTextViews;
-    private ArrayList<LinearLayout> mLinearLayouts;
     private ArrayList<String> mRecipeName;
     private ArrayList<String> mIngredientList;
     private ArrayList<String> mStep;
@@ -39,7 +42,6 @@ public class RecipePageActivity extends BasicActivity
     private boolean mHasResults;
 
     private static String smPICTURE_NOT_AVAILABLE = "https://www.themezzaninegroup.com/wp-content/uploads/2017/12/photo-not-available.jpg";
-    private static int smSIZE = 4; //TODO don't limit to only four
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -51,7 +53,6 @@ public class RecipePageActivity extends BasicActivity
         // Initialize variables
         mImageViews = new ArrayList<>();
         mTextViews = new ArrayList<>();
-        mLinearLayouts = new ArrayList<>();
         mRecipeName = new ArrayList<>();
         mIngredientList = new ArrayList<>();
         mStep = new ArrayList<>();
@@ -64,22 +65,6 @@ public class RecipePageActivity extends BasicActivity
         final String[] ingredients = intent.getStringArrayExtra("Ingredients");
         final boolean category = intent.getExtras().getBoolean("Category");
         final String user = intent.getStringExtra("User");
-
-        // Assign some constants
-        final String IMAGE_VIEW_NAME = "foodImageView";
-        final String TEXT_VIEW_NAME = "foodTextView";
-        final String LINEAR_LAYOUT_NAME = "linearLayout";
-
-        // Assign values to arrays
-        for (int nIndex = 0; nIndex < smSIZE; nIndex++)
-        {
-            int nResID = getResources().getIdentifier(IMAGE_VIEW_NAME + nIndex, "id", getPackageName());
-            mImageViews.add((ImageView)findViewById(nResID));
-            nResID = getResources().getIdentifier(TEXT_VIEW_NAME + nIndex, "id", getPackageName());
-            mTextViews.add((TextView)findViewById(nResID));
-            nResID = getResources().getIdentifier(LINEAR_LAYOUT_NAME + nIndex, "id", getPackageName());
-            mLinearLayouts.add((LinearLayout)findViewById(nResID));
-        }
 
         // Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -100,25 +85,18 @@ public class RecipePageActivity extends BasicActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                if (mPageLinkCounter < smSIZE)
+                if (user.equals("null"))
                 {
-                    if (user.equals("null"))
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren())
                     {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren())
-                        {
-                            searchDatabase(snapshot, category, ingredients);
-                            if (mPageLinkCounter >= smSIZE)
-                            {
-                                break;
-                            }
-                        }
-                        hasResultsMessage();
+                        searchDatabase(snapshot, category, ingredients);
                     }
-                    else
-                    {
-                        searchDatabase(dataSnapshot, category, ingredients);
-                        hasResultsMessage();
-                    }
+                    hasResultsMessage();
+                }
+                else
+                {
+                    searchDatabase(dataSnapshot, category, ingredients);
+                    hasResultsMessage();
                 }
             }
 
@@ -156,7 +134,6 @@ public class RecipePageActivity extends BasicActivity
 
     public void searchDatabase(DataSnapshot snapshot, boolean category, String[] ingredients)
     {
-        Search:
         for (DataSnapshot recipeID : snapshot.getChildren())
         {
             String recipeName = recipeID.getKey();
@@ -174,6 +151,8 @@ public class RecipePageActivity extends BasicActivity
                         mRecipeName.add(recipeName);
                         mIngredientList.add(ingredientList);
 
+                        addSearchResult(RecipePageActivity.this);
+
                         try
                         {
                             Picasso.get().load(attributes.child("imageURL").getValue().toString()).fit().centerCrop().into(mImageViews.get(mPageLinkCounter));
@@ -186,17 +165,13 @@ public class RecipePageActivity extends BasicActivity
                         }
 
                         mTextViews.get(mPageLinkCounter).setText(mRecipeName.get(mPageLinkCounter));
+                        mTextViews.get(mPageLinkCounter).setGravity(Gravity.CENTER);
+
                         mStep.add(attributes.child("steps").getValue().toString());
 
                         clickToGoToOnePageRecipe(mPageLinkCounter);
 
                         mPageLinkCounter++;
-
-                        if (mPageLinkCounter >= smSIZE)
-                        {
-                            break Search;
-                        }
-
                         mHasResults = true;
 
                     }
@@ -207,7 +182,7 @@ public class RecipePageActivity extends BasicActivity
 
     public void clickToGoToOnePageRecipe(final int counter)
     {
-        mLinearLayouts.get(counter).setOnClickListener(new View.OnClickListener()
+        mImageViews.get(counter).setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -230,6 +205,19 @@ public class RecipePageActivity extends BasicActivity
         {
             Toast.makeText(RecipePageActivity.this, "No results, try searching other ingredients!", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void addSearchResult(Context context)
+    {
+        LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LinearLayout linearLayout = findViewById(R.id.resultLayout);
+
+        LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.result, null);
+        layout.setMinimumHeight(320);
+        linearLayout.addView(layout, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        mImageViews.add((ImageView)findViewById(R.id.resultImageView));
+        mTextViews.add((TextView)findViewById(R.id.resultTextView));
     }
 
 }
