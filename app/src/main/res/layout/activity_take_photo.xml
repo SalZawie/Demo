@@ -8,7 +8,6 @@
 
     <TextView
         android:id="@+id/txt_addPhoto"
-        android:onClick="addPhoto"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="48dp"
@@ -61,6 +60,7 @@
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
         android:layout_marginBottom="79dp"
+        android:onClick="addPhoto"
         android:text="@string/btn_add_photo"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"

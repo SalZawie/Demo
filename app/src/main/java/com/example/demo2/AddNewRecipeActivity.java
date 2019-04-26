@@ -103,5 +103,6 @@ public class AddNewRecipeActivity extends AppCompatActivity
     public void addPicture(View view)
     {
         Intent intent = new Intent(AddNewRecipeActivity.this, TakePhoto.class);
+        startActivity(intent);
     }
 }
