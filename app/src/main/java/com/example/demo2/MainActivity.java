@@ -23,15 +23,25 @@ public class MainActivity extends BasicActivity
     private TextInputLayout passWord;
     private FirebaseAuth user_auth;
 
+    private static boolean isEnabled = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
+        if (!isEnabled)
+        {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+            isEnabled = true;
+        }
+
         userEmail = (TextInputLayout) findViewById(R.id.txtEmail);
         passWord  = (TextInputLayout) findViewById(R.id.txtPassword);
         user_auth = FirebaseAuth.getInstance();
+
+
     }
 
     public void validateEmailPassword(View v)
