@@ -1,6 +1,9 @@
 package com.example.demo2;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -8,6 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -148,6 +154,7 @@ public class AddRecipeController
     private String getImageUrl() { return this.strImageUrl; }
 
     private String getUserUid() { return this.mUserUid = currentUser.getUid(); }
+
 
     public void DbPush(final Context context)
     {

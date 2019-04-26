@@ -12,11 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.google.firebase.database.FirebaseDatabase;
 
 /* Author: Dan St-Jean, dan.stj@outlook.com */
 
-public class AddNewRecipeActivity extends AppCompatActivity
+public class AddNewRecipeActivity extends AppCompatActivity 
 {
     private LinearLayout mLinearLayout;
 
@@ -24,13 +23,13 @@ public class AddNewRecipeActivity extends AppCompatActivity
     private EditText mRecipeDirections;
     private EditText mImageUrl;
 
-    private RadioButton mFoodButton;
-
     private int editTextCounter = 1;
     private static final int MAX_EDITTEXT_LIMIT = 20;
 
     private Button mAddIngredientBtn;
     private Button mBackBtn;
+    private Button mAddPic;
+    private RadioButton mFoodButton;
 
     AddRecipeController addRecipeController;
 
@@ -40,20 +39,17 @@ public class AddNewRecipeActivity extends AppCompatActivity
         setContentView(R.layout.activity_add_new_recipe);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        addRecipeController = new AddRecipeController();
-
         mLinearLayout = findViewById(R.id.parent_linear_layout);
 
-        // UI elements
+        // Instantiate Edit text fields
         mRecipeName = findViewById(R.id.edittxt_recipe_name);
         mRecipeDirections = findViewById(R.id.edittxt_recipe_description);
         mImageUrl = findViewById(R.id.edittxt_add_image_url);
 
-        mFoodButton = findViewById(R.id.radio_btn_food);
-
         // Instantiate Buttons
         mAddIngredientBtn = findViewById(R.id.btn_add_an_ingredient);
         mBackBtn = findViewById(R.id.btn_previous_from_add_new_recipe);
+        mFoodButton = findViewById(R.id.radio_btn_food);
 
         // Access to the activities control Class.
         addRecipeController = new AddRecipeController(mLinearLayout, mRecipeName,mRecipeDirections, mImageUrl, mFoodButton);
@@ -84,7 +80,8 @@ public class AddNewRecipeActivity extends AppCompatActivity
         mBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(AddNewRecipeActivity.this, SearchPageActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -100,6 +97,11 @@ public class AddNewRecipeActivity extends AppCompatActivity
     {
         mLinearLayout.removeView((View) v.getParent());
 
-        editTextCounter = editTextCounter > 0 ? editTextCounter++ : 0;
+        editTextCounter = editTextCounter > 0 ? editTextCounter-- : 0;
+    }
+
+    public void addPicture(View view)
+    {
+        Intent intent = new Intent(AddNewRecipeActivity.this, TakePhoto.class);
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cooking Recipes</string>
+    <string name="app_name">Demo2</string>
     <string name="hello_world">Hello World</string>
 
     <!-->Hints for placeholders<-->
@@ -73,5 +73,6 @@
 
     <string name="password_reseting">Welcome to Password Reseting</string>
     <string name="btn_reset_password">Reset Password</string>
+    <string name="label_btn_add_a_picture">ADD A PICTURE</string>
 
 </resources>
