@@ -9,139 +9,20 @@
     android:orientation="vertical"
     tools:context=".RecipePageActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout0"
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/firstHorizontal"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalGuide"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/foodImageView0"
+        <LinearLayout
+            android:id="@+id/resultLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:contentDescription="@string/image_content_description"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/foodTextView0"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:textSize="@dimen/etxt_box" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/secondHorizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/firstHorizontal">
-
-        <ImageView
-            android:id="@+id/foodImageView1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:contentDescription="@string/image_content_description"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/foodTextView1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:textSize="@dimen/etxt_box" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/thirdHorizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/secondHorizontal">
-
-        <ImageView
-            android:id="@+id/foodImageView2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:contentDescription="@string/image_content_description"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/foodTextView2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:textSize="@dimen/etxt_box" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/fourthHorizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/thirdHorizontal">
-
-        <ImageView
-            android:id="@+id/foodImageView3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:contentDescription="@string/image_content_description"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/foodTextView3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:textSize="@dimen/etxt_box" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
     <Button
         android:id="@+id/backButton"
@@ -156,7 +37,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fourthHorizontal" />
+        app:layout_constraintTop_toTopOf="@+id/horizontalGuide" />
 
     <Button
         android:id="@+id/addRecipeButton"
@@ -170,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/logoutButton"
-        app:layout_constraintTop_toTopOf="@+id/fourthHorizontal" />
+        app:layout_constraintTop_toTopOf="@+id/horizontalGuide" />
 
     <Button
         android:id="@+id/logoutButton"
@@ -184,38 +65,10 @@
         app:layout_constraintEnd_toStartOf="@+id/addRecipeButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/backButton"
-        app:layout_constraintTop_toTopOf="@+id/fourthHorizontal" />
+        app:layout_constraintTop_toTopOf="@+id/horizontalGuide" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/verticalGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="160dp" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/firstHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.225" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/secondHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/thirdHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.675" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/fourthHorizontal"
+        android:id="@+id/horizontalGuide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

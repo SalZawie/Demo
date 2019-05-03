@@ -9,12 +9,11 @@
 
     <EditText
         android:id="@+id/searchOne"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:ems="14"
         android:hint="@string/ingredient_1"
         android:inputType="textPersonName"
         android:textSize="@dimen/etxt_box"
@@ -25,11 +24,10 @@
 
     <EditText
         android:id="@+id/searchTwo"
-        android:layout_width="350dp"
-        android:layout_height="48dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:ems="14"
         android:hint="@string/ingredient_2"
         android:inputType="textPersonName"
         android:textSize="@dimen/etxt_box"
@@ -40,11 +38,10 @@
 
     <EditText
         android:id="@+id/searchThree"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:ems="14"
         android:hint="@string/ingredient_3"
         android:inputType="textPersonName"
         android:textSize="@dimen/etxt_box"

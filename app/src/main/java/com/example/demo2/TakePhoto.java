@@ -16,11 +16,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -49,6 +51,7 @@ public class TakePhoto extends AppCompatActivity {
         photoName = findViewById(R.id.txtName);
         btn_takePhoto = findViewById(R.id.btn_takePhoto);
         btn_addPhoto =findViewById(R.id.btn_addPhoto);
+        storageRef = FirebaseStorage.getInstance().getReference();
 
         hasCamera();
         checkFilesPermissions();
@@ -82,11 +85,10 @@ public class TakePhoto extends AppCompatActivity {
     public void addPhoto(View view) {
         //Save image to Firebase:
         // TODO:Check for authenication (only authenicated users can add photos)
-
-        //  Get reference to the storage (path, where to save)
-        StorageReference photoRef = storageRef.child("images/recipes/"+strName+".jpg");
-        InputStream stream;
         try {
+            //  Get reference to the storage (path, where to save)
+            StorageReference photoRef = storageRef.child("images/recipes/"+strName+".jpg");
+            InputStream stream;
             stream = this.getContentResolver().openInputStream(URI);
             UploadTask uploadTask = photoRef.putStream(stream);
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -94,6 +96,7 @@ public class TakePhoto extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // Get a URI to the uploaded content
                     Uri downloadUrl = taskSnapshot.getUploadSessionUri();
+                    Toast.makeText(TakePhoto.this,"Photo is saved to the gallery & storage", Toast.LENGTH_LONG).show();
                     // TODO SAVE URI TO DATABASE
                     Log.d("debug", "Success TO UPLOAD IMAGE");
 
@@ -108,7 +111,6 @@ public class TakePhoto extends AppCompatActivity {
         catch (Exception e) {
             e.fillInStackTrace();
         }
-
     }
 
     public boolean hasCamera()
